@@ -1,0 +1,21 @@
+.topnav {
+    position: relative;
+    overflow: hidden;
+    background-color: orange;
+    height: 35vh;
+  }
+  
+  .topnav-centered a {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  #center-logo {
+    margin-top: -10px;
+    margin-bottom: -10px;
+    height: 30vh;
+    width: 30vh;
+  }
