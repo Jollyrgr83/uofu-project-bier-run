@@ -1,0 +1,36 @@
+/* css styling for app-wide components */
+.local-navbar {
+  background-color: rgb(255, 192, 0);
+  width: 100%;
+  margin: 0;
+}
+
+.welcome {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 1.5em;
+  color: black;
+  width: 28vw;
+  margin: 10px;
+  padding: 10px;
+}
+
+.text-logo {
+  width: 9vw;
+  margin: 10px;
+}
+
+.logo {
+  width: 9vw;
+  margin: 10px;
+}
+
+.svg-container {
+  width: 12vw;
+  margin: 10px;
+}
+
+.nav-icons {
+  font-size: 4em;
+  margin: 40px 25px 10px 25px;
+}
