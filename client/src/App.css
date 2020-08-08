@@ -5,6 +5,21 @@
   margin: 0;
 }
 
+.nav-left {
+  width: 20vw;
+  padding: 10px;
+}
+
+.nav-center {
+  width: 55vw;
+  padding: 10px;
+}
+
+.svg-container {
+  width: 20vw;
+  padding: 5px;
+}
+
 .welcome {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
@@ -16,21 +31,21 @@
 }
 
 .text-logo {
-  width: 9vw;
+  width: 8vw;
   margin: 10px;
 }
 
 .logo {
-  width: 9vw;
-  margin: 10px;
-}
-
-.svg-container {
-  width: 12vw;
+  width: 8vw;
   margin: 10px;
 }
 
 .nav-icons {
-  font-size: 4em;
+  /* font-size: 4em; */
+  width: 30vw;
   margin: 40px 25px 10px 25px;
+}
+
+.nav-icons:hover {
+  cursor: pointer;
 }

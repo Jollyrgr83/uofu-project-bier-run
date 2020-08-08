@@ -1,10 +1,10 @@
 import React from 'react';
-// import './HomePage.css';
+import './HomePage.css';
 // import logo from '../assets/images/BierRunLogo.svg';
 
 function HomePage() {
   return (
-    <main>
+    <maindiv>
       <div class="topnav">
         <div class="topnav-centered">
           <a href="#home" class="active"><img id="center-logo" alt="logo" src="" /></a>
@@ -14,7 +14,7 @@ function HomePage() {
       <div class="about-us">
           Simple About Us
       </div>
-    </main>
+    </maindiv>
   ) 
 }
 
