@@ -24,7 +24,7 @@ function DriverPage() {
               </div>
             </div>
           </div>
-        )
+        );
       })        
       }
     </div>
