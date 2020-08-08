@@ -12,13 +12,13 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        {/* <Nav /> */}
         <Switch>
           <Route exact path={["/"]}>
-            <LoginPage />
+            <HomePage />
           </Route>
           <Route exact path={["/home"]}>
-            <HomePage />
+            <LoginPage />
           </Route>
         </Switch>
       </div>
