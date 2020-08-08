@@ -1,5 +1,7 @@
 import React from "react";
 
+import LoginButton from "./LoginButton";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -33,6 +35,9 @@ function Nav() {
     <div className="row">
       <p className="welcome mx-auto">Welcome [username], your address is: 123 Main Street, Anytown, USA, 12345</p>
       <p className="welcome mx-auto">You have no active orders</p>
+    </div>
+    <div className="row">
+      <LoginButton />
     </div>
     </div>
   );

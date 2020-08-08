@@ -8,15 +8,19 @@ import DriverPage from "./pages/DriverPage"
 import NavBar from "./components/NavBar/NavBar.js"
 
 import Nav from "./components/Nav";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   return (
     <Router>
       <div>
-        {/* <Nav /> */}
+        <Nav />
         <Switch>
           <Route exact path={["/"]}>
             <HomePage />
+          </Route>
+          <Route exact path={["/auth/login"]}>
+            <AuthPage/>
           </Route>
           <Route exact path={["/home"]}>
             <LoginPage />
