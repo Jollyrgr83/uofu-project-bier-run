@@ -1,8 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+h2, h1 ,p {
+  src: url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap);
+  font-family: Montserrat;
+}
 .topnav {
     position: relative;
     overflow: hidden;
-    background-color: orange;
-    height: 35vh;
+    background-color: rgb(255, 192, 0);
+    height: 33vh;
   }
   
   .topnav-centered a {
@@ -18,4 +26,44 @@
     margin-bottom: -10px;
     height: 30vh;
     width: 30vh;
+  }
+
+  .about-us {
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(230, 230, 230);
+    height: 67vh;
+  }
+
+  .content {
+    margin-left: 3vw;
+  }
+
+  .about-title {
+    margin-top: 2vh;
+    margin-left: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .new-row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .new-col {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+  }
+
+  .columns-3 {
+    list-style: none;
+    columns: 3;
+  }
+
+  .test-div {
+    background-color: lightyellow;
   }
