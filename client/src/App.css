@@ -1,8 +1,15 @@
 /* css styling for app-wide components */
+.temp-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .local-navbar {
   background-color: rgb(255, 192, 0);
   width: 100%;
   margin: 0;
+  padding: 0;
 }
 
 .nav-left {

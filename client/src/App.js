@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-import DriverPage from "./pages/DriverPage"
-import NavBar from "./components/NavBar/NavBar.js"
+import DriverPage from "./pages/DriverPage";
+import CustomerPage from "./pages/CustomerPage";
+import NavBar from "./components/NavBar/NavBar.js";
 
 import Nav from "./components/Nav";
 import AuthPage from "./pages/AuthPage";
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route exact path={["/driver"]}>
             <DriverPage />
+          </Route>
+          <Route exact path={["/customer"]}>
+            <CustomerPage />
           </Route>
         </Switch>
       </div>
