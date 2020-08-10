@@ -4,17 +4,17 @@ import './HomePage.css';
 
 function HomePage() {
   return (
-    <maindiv>
-      <div class="topnav">
-        <div class="topnav-centered">
-          <a href="#home" class="active"><img id="center-logo" alt="logo" src="" /></a>
+    <main>
+      <div className="topnav">
+        <div className="topnav-centered">
+          <a href="#home" className="active"><img id="center-logo" alt="logo" src="" /></a>
         </div>
       </div>
 
-      <div class="about-us">
+      <div className="about-us">
           Simple About Us
       </div>
-    </maindiv>
+    </main>
   ) 
 }
 

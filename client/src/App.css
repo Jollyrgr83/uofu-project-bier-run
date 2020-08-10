@@ -20,32 +20,60 @@
   padding: 5px;
 }
 
-.welcome {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  font-size: 1.5em;
-  color: black;
-  width: 28vw;
-  margin: 10px;
-  padding: 10px;
-}
-
 .text-logo {
   width: 8vw;
   margin: 10px;
 }
 
 .logo {
-  width: 8vw;
+  /* width: 8vw; */
+  width: 100px;
   margin: 10px;
 }
 
 .nav-icons {
-  /* font-size: 4em; */
+  font-size: 5vh;
   width: 30vw;
-  margin: 40px 25px 10px 25px;
+  margin: 40px 25px 0px 25px;
 }
 
 .nav-icons:hover {
   cursor: pointer;
+}
+
+.text-logo-top {
+  outline: solid 4px black;
+  background-color: rgb(255, 192, 0);
+  color: black;
+  padding: 0 5px 0 5px;
+  font-size: 2em;
+}
+
+.text-logo-bottom {
+  outline: solid 4px black;
+  background-color: black;
+  color: rgb(255, 192, 0);
+  padding: 0 5px 0 5px;
+  font-size: 2em;
+}
+
+.text-logo-container {
+  width: 100px;
+  margin: 10px;
+  font-family: "Stencil", sans-serif;
+}
+
+.message-container {
+  background-color: rgb(255, 249, 229);
+}
+
+.welcome {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 1.2em;
+  color: black;
+  width: 48%;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
 }
