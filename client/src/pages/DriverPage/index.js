@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./index.css";
+
 const dummyDrivers = [
   {
     id: 1,
