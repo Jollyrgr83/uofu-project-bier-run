@@ -36,7 +36,7 @@ function HomePage() {
             </li>
           </ul>
 
-          {/* <div class="test-div"><h1>Test Div</h1></div> */}
+          <div class="test-div"><h1>Test Div</h1></div>
         </div>
 
       </div>
