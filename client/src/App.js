@@ -4,9 +4,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-import NavBar from "./components/NavBar/NavBar.js"
+import DriverPage from "./pages/DriverPage";
+import CustomerPage from "./pages/CustomerPage";
+import NavBar from "./components/NavBar/NavBar.js";
 
 import Nav from "./components/Nav";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   return (
@@ -15,10 +18,19 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path={["/"]}>
-            <LoginPage />
+            <HomePage />
+          </Route>
+          <Route exact path={["/auth/login"]}>
+            <AuthPage/>
           </Route>
           <Route exact path={["/home"]}>
-            <HomePage />
+            <LoginPage />
+          </Route>
+          <Route exact path={["/driver"]}>
+            <DriverPage />
+          </Route>
+          <Route exact path={["/customer"]}>
+            <CustomerPage />
           </Route>
         </Switch>
       </div>

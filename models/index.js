@@ -1,3 +1,5 @@
 module.exports = {
-  Driver: require("./driver")
+  User: require("./user"),
+  Inventory: require("./inventory"),
+  Order: require("./order")
 };
