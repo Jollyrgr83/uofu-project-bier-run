@@ -1,3 +1,18 @@
+.message-container {
+  background-color: rgb(255, 249, 229);
+}
+
+.welcome {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 1.2em;
+  width: 100%;
+  color: black;
+  margin: 10px;
+  padding: 10px;
+  text-align: left;
+}
+
 .inventory-card {
   width: 300px;
   height: 300px;
@@ -14,7 +29,7 @@
   box-shadow: 3px 3px 6px black;
   border-radius: 15px;
   margin: 15px;
-  padding: 10px;
+  padding: 25px;
 }
 
 .customer-background {
