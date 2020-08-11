@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "start": "npm-run-all --parallel spa api-server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
@@ -36,6 +37,8 @@
     "react-scripts": "^3.4.0",
     "reactstrap": "^8.0.0"
 =======
+=======
+>>>>>>> f8f08726c614e7b9db898121fe56a9da953a537f
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
@@ -44,6 +47,9 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
+<<<<<<< HEAD
+>>>>>>> f8f08726c614e7b9db898121fe56a9da953a537f
+=======
 >>>>>>> f8f08726c614e7b9db898121fe56a9da953a537f
   },
   "author": "",
