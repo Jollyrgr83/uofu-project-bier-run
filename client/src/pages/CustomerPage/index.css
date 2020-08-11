@@ -13,10 +13,25 @@
   border: solid 1px black;
   box-shadow: 3px 3px 6px black;
   border-radius: 15px;
-  margin: 25px;
+  margin: 15px;
   padding: 10px;
 }
 
 .customer-background {
   background-color: rgb(255, 249, 229);
+}
+
+.cart-title {
+  width: 100%;
+  text-align: center;
+}
+
+.cart-sub {
+  width: 100%;
+  text-align: left;
+}
+
+.cart-total {
+  width: 100%;
+  text-align: end;
 }
