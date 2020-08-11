@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import DriverPage from "./pages/DriverPage";
 import CustomerPage from "./pages/CustomerPage";
 import NavBar from "./components/NavBar/NavBar.js";
+import NewNav from "./components/NewNav/NewNav.js"
 
 import Nav from "./components/Nav";
 import AuthPage from "./pages/AuthPage";
@@ -15,7 +16,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        {/* <NewNav /> */}
         <Switch>
           <Route exact path={["/"]}>
             <HomePage />
