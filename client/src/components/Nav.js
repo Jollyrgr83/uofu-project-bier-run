@@ -40,10 +40,6 @@ function Nav() {
         <div className="text-center nav-center">
           <img className="logo" src={logo} alt="Barry" />
         </div>
-        <label className="switch">
-          <input type="checkbox" />
-          <span className="slider round"></span>
-        </label>
         <div className="svg-container text-center">
           <FontAwesomeIcon
             icon={faCog}
