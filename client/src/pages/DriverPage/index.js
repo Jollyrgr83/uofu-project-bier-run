@@ -14,16 +14,6 @@ import "./index.css";
 //   date: { type: Date, default: Date.now }
 // });
 
-// const orderSchema = {
-//   totalPrice: 48.99,
-//   customerID: dummyOrders.id,
-//   // driverID: { type: String },
-//   estimatedTime: 10 + "minutes",
-//   complete: false,
-//   deliveredDate: "Today",
-//   // date: { type: Date, default: Date.now }
-// };
-
 const orderDB = {
   cost: 99.99,
   description: "6 pack Bud Light"
@@ -33,7 +23,7 @@ const dummyOrders = [
   {
     id: 1,
     name: "Bob Smith",
-    details: orderDB,
+    details: [orderDB],
     address: "123 Any Street, SLC, UT",
     inProgress: false
   },
@@ -41,7 +31,7 @@ const dummyOrders = [
   {
     id: 2,
     name: "Dave Johnson",
-    details: orderDB,
+    details: [orderDB],
     address: "123 Any Street, SLC, UT",
     inProgress: true
   }
