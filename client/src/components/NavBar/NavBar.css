@@ -1,0 +1,83 @@
+#center-logo {
+    margin-top: -10px;
+    margin-bottom: -10px;
+    height: 10vh;
+    width: 10vh;
+  }
+
+  
+  .topnav {
+    position: relative;
+    overflow: hidden;
+    background-color: orange;
+    height: 10vh;
+  }
+  
+  .topnav a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    color: black;
+  }
+  
+  .topnav a.active {
+    color: white;
+  }
+  
+  .topnav-centered a {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .topnav-right {
+    float: right;
+    transform: translate(-30%, 50%);
+  }
+
+  .nav-btn {
+    background-color: rgb(255, 249, 229);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+
+  #order-btn {
+    background-color: rgb(255, 249, 229); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transform: translate(20%, 50%)
+  }
+  
+  /* Responsive navigation menu (for mobile devices) */
+  @media screen and (max-width: 600px) {
+    .topnav a, .topnav-right {
+      float: none;
+      display: block;
+    }
+    
+    .topnav-centered a {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: none;
+    }
+  }
