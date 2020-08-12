@@ -1,7 +1,7 @@
 import React from "react"
 import "./NewNav.css"
 import LoginLink from "../LoginLink";
-import logo from "../../assets/images/"
+// import logo from "../../assets/images/ppt-logo.png"
 
 function NewNav() {
     return (
