@@ -22,3 +22,28 @@
     opacity: .7;
     background-color: rgb(75, 0, 0)!important;
 }
+
+.text-logo {
+  font-family: "Stencil", sans-serif;
+  font-size: 42px;
+  margin: 10px;
+}
+
+.text-bier {
+  border: solid 4px black;
+  background-color: rgb(255, 192, 0);
+  color: black;
+  padding: 5px;
+}
+
+.text-run {
+  border: solid 4px black;
+  background-color: black;
+  color: rgb(255, 192, 0);
+  padding: 5px;
+  margin-right: 25px;
+}
+
+.local-nav-font {
+  font-family: "Montserrat", sans-serif !important;
+}
