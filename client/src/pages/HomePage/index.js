@@ -1,5 +1,6 @@
 import React from 'react';
 import "../HomePage/HomePage.css"
+import LoginButton from "../../components/LoginButton";
 import logo from "../../assets/images/BierRunLogoNoBG.svg"
 
 function HomePage() {
@@ -48,7 +49,8 @@ function HomePage() {
 
               <div className="col-md-4">
                 <form method="get" action="/customer">
-                  <button className="begin-button" onclick="">Get Started</button>
+                  <LoginButton classNameInput="begin-button" buttonTextInput="Get Started" />
+                  {/* <button className="begin-button" onclick="">Get Started</button> */}
                 </form>
               </div>
               
