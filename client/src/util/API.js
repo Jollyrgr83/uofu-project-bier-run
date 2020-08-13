@@ -22,8 +22,8 @@ export default {
     { name: "Miller Lite", logo: millerLite, id: 7 },
   ],
   // Gets inventory data for customer page
-  getInventory: function() {
-    return axios.get("/api/customer").then(res => {
+  getInventory: function () {
+    return axios.get("/api/customer").then((res) => {
       const receivedData = {};
       for (let i = 0; i < res.data.length; i++) {
         if (!receivedData[res.data[i].beerName]) {
@@ -33,10 +33,16 @@ export default {
           id: res.data[i]._id,
           beerName: res.data[i].beerName,
           quantity: res.data[i].quantity,
-          price: res.data[i].price
-        })
+          price: res.data[i].price,
+        });
       }
       return receivedData;
     });
-  }
+  },
+  // sends customer order to database server
+  sendOrder: function (orderObj) {
+    return axios.post("/api/customer", orderObj).then((res) => {
+      return res;
+    });
+  },
 };

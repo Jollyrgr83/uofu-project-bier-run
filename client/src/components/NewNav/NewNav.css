@@ -24,13 +24,9 @@
 }
 
 .text-logo {
-  font-family: "Stencil", sans-serif;
+  font-family: "Saira Stencil One", cursive;
   font-size: 42px;
   margin: 10px;
-}
-
-.text-bier, .text-run {
-  font-family: 'Saira Stencil One', cursive;
 }
 
 .text-bier {

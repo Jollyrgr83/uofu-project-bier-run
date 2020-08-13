@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 // stylesheet
 import "./index.css";
 // API functions
@@ -21,6 +20,10 @@ function CustomerPage() {
     order: [],
     totalItems: 0,
     totalPrice: 0,
+  });
+  const [placeOrderMessage, setPlaceOrderMessage] = useState({
+    text: "",
+    isShow: false
   });
 
   useEffect(() => {
@@ -71,17 +74,37 @@ function CustomerPage() {
     toggleModal();
   }
 
+  function placeOrder(e) {
+    e.preventDefault();
+    if (order.totalItems === 0) {
+      return;
+    } else {
+      const orderDetails = JSON.stringify(order.order);
+      const orderObj = {
+        orderDetails: orderDetails,
+        totalPrice: order.totalPrice,
+        totalItems: order.totalItems,
+        customerID: "testCustomerID",
+      };
+      API.sendOrder(orderObj).then((res) => {
+        console.log("sendOrder res", res);
+        setPlaceOrderMessage({
+          isShow: true,
+          text: `Your order has been placed. Your order ID is: ${res.data._id}`
+        });
+      });
+    }
+  }
+
   return (
-    <div>
+    <div className="main-container">
       <div className="row message-container">
         <div className="col-sm-8">
           <p className="welcome">
-            Welcome [username], your address is: 123 Main Street, Anytown, USA,
-            12345
-          </p>
+            Welcome [username], your address is: [user address]</p>
         </div>
         <div className="col-sm-4">
-          <p className="welcome">Your order #124 should arrive at 7:35 pm.</p>
+          <p className="welcome">Your order [order ID] should arrive at [arrival time].</p>
         </div>
       </div>
       <Modal
@@ -89,17 +112,17 @@ function CustomerPage() {
         onRequestClose={toggleModal}
         contentLabel="Inventory Order Screen"
       >
-        <form id="modalForm">
-          <div className="modal-title">{modalState.modalName}</div>
+        <form id="modalForm" className="text-center mx-auto">
+          <div className="modal-title mx-auto">{modalState.modalName}</div>
           {modalState.modalInventory.map((x) => {
             return (
-              <div className="row modal-row" key={x.id}>
-                <p className="modal-item">{x.quantity}</p>
-                <p className="modal-item">${x.price}</p>
+              <div className="row modal-row mx-auto" key={x.id}>
+                <p className="modal-item mx-auto">{x.quantity}</p>
+                <p className="modal-item mx-auto">${x.price}</p>
                 <input
                   name={`${modalState.modalName},${x.quantity},${x.price}`}
                   type="number"
-                  className="modal-item"
+                  className="modal-item mx-auto"
                 />
               </div>
             );
@@ -152,6 +175,10 @@ function CustomerPage() {
               <hr></hr>
               <p>Total Items: {order.totalItems}</p>
               <p>Total: ${order.totalPrice.toFixed(2)}</p>
+              <button className="orderButton" onClick={placeOrder}>
+                Place Order
+              </button>
+              <p className={placeOrderMessage.isShow ? "placeOrderMessage show" : "placeOrderMessage hide"}>{placeOrderMessage.text}</p>
             </div>
           </div>
         </div>

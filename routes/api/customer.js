@@ -6,5 +6,6 @@ const inventoryController = require("../../controllers/InventoryController");
 router
   .route("/")
   .get(inventoryController.findAll)
+  .post(orderController.newOrder);
 
 module.exports = router;
