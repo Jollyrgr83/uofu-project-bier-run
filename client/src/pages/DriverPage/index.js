@@ -16,8 +16,8 @@ import "./index.css";
 
 const orderDB = {
   cost: 99.99,
-  description: "6 pack Bud Light"
-}
+  description: "6 pack Bud Light",
+};
 
 const dummyOrders = [
   {
@@ -25,7 +25,7 @@ const dummyOrders = [
     name: "Bob Smith",
     details: [orderDB],
     address: "123 Any Street, SLC, UT",
-    inProgress: false
+    inProgress: false,
   },
 
   {
@@ -33,17 +33,18 @@ const dummyOrders = [
     name: "Dave Johnson",
     details: [orderDB],
     address: "123 Any Street, SLC, UT",
-    inProgress: true
-  }
+    inProgress: true,
+  },
 ];
-
 
 function DriverPage() {
   return (
     <div>
       <div className="row">
         <div className="col-sm-5 welcome-container mx-auto">
-          <p className="driver-welcome mx-auto">Welcome [username], your current status is: [status]</p>
+          <p className="driver-welcome mx-auto">
+            Welcome [username], your current status is: [status]
+          </p>
         </div>
         <div className="col-sm-2 toggle-container">
           <label className="switch mx-auto text-center">
@@ -52,20 +53,35 @@ function DriverPage() {
           </label>
         </div>
         <div className="col-sm-5 order-container mx-auto">
-          <p className="driver-orders mx-auto">Your active deliveries are: [active deliveries]</p>
+          <p className="driver-orders mx-auto">
+            Your active deliveries are: [active deliveries]
+          </p>
         </div>
       </div>
-      {dummyOrders.map(x => {
-        return (
-          <div className="row" key={x.id}>
-            <div className="col-sm-8">
-              <p className={x.inProgress ? "order-card-selected" : "order-card"}>{x.id} {x.name} {x.details} {x.address}</p>
-              <button className="driver-select-button">Select</button>              
+      {dummyOrders.map((x) => {
+        if (x.inProgess) {
+          return (
+            <div className="row" key={x.id}>
+              <div className="col-sm-8">
+                <p className="order-card-selected">
+                  {`${x.id} ${x.name} ${x.details} ${x.address}`}
+                </p>
+                <button className="driver-select-button">Select</button>
+              </div>
             </div>
-          </div>
-        );
-      })        
-      }
+          );
+        } else
+          return (
+            <div className="row" key={x.id}>
+              <div className="col-sm-8">
+                <p className="order-card">
+                {`${x.id} ${x.name} ${x.details} ${x.address}`}
+                </p>
+                <button className="driver-select-button">Select</button>
+              </div>
+            </div>
+          );
+      })}
     </div>
   );
 }

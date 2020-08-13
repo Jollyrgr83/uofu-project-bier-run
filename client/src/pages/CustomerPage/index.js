@@ -14,47 +14,73 @@ import millerLite from "../../assets/miller-lite.jpg";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
-const inventory = [
-  { name: "Budweiser", logo: bud },
-  { name: "Bud Light", logo: budLight },
-  { name: "Coors Light", logo: coorsLight },
-  { name: "Blue Moon", logo: blueMoon },
-  { name: "Corona", logo: corona },
-  { name: "Heineken", logo: heineken },
-  { name: "Michelob Ultra", logo: michelobUltra },
-  { name: "Miller Lite", logo: millerLite },
-];
+const inventory = {
+  images: [
+    { name: "Budweiser", logo: bud },
+    { name: "Bud Light", logo: budLight },
+    { name: "Coors Light", logo: coorsLight },
+    { name: "Blue Moon", logo: blueMoon },
+    { name: "Corona", logo: corona },
+    { name: "Heineken", logo: heineken },
+    { name: "Michelob Ultra", logo: michelobUltra },
+    { name: "Miller Lite", logo: millerLite },
+  ],
+  Budweiser: [
+    { quantity: "6-pack Bottles", price: 9.99 },
+    { quantity: "12-pack Bottles", price: 18.99 },
+    { quantity: "12-pack Cans", price: 9.99 },
+    { quantity: "24-pack Cans", price: 22.99 },
+  ],
+  "Coors Light": [
+    { quantity: "6-pack Bottles", price: 8.99 },
+    { quantity: "12-pack Bottles", price: 18.99 },
+    { quantity: "12-pack Cans", price: 8.99 },
+    { quantity: "24-pack Cans", price: 28.99 },
+  ],
+  "Bud Light": [
+    { quantity: "6-pack Bottles", price: 9.99 },
+    { quantity: "12-pack Bottles", price: 18.99 },
+    { quantity: "12-pack Cans", price: 9.99 },
+    { quantity: "24-pack Cans", price: 22.99 },
+  ],
+  "Blue Moon": [
+    { quantity: "6-pack Bottles", price: 9.99 },
+    { quantity: "12-pack Bottles", price: 18.99 },
+    { quantity: "12-pack Cans", price: 9.99 },
+    { quantity: "24-pack Cans", price: 22.99 },
+  ],
+  Corona: [
+    { quantity: "6-pack Bottles", price: 9.99 },
+    { quantity: "12-pack Bottles", price: 18.99 },
+    { quantity: "12-pack Cans", price: 9.99 },
+    { quantity: "24-pack Cans", price: 22.99 },
+  ],
+  Heineken: [
+    { quantity: "6-pack Bottles", price: 9.99 },
+    { quantity: "12-pack Bottles", price: 18.99 },
+    { quantity: "12-pack Cans", price: 9.99 },
+    { quantity: "24-pack Cans", price: 22.99 },
+  ],
+  "Michelob Ultra": [
+    { quantity: "6-pack Bottles", price: 9.99 },
+    { quantity: "12-pack Bottles", price: 18.99 },
+    { quantity: "12-pack Cans", price: 9.99 },
+    { quantity: "24-pack Cans", price: 22.99 },
+  ],
+  "Miller Lite": [
+    { quantity: "6-pack Bottles", price: 9.99 },
+    { quantity: "12-pack Bottles", price: 18.99 },
+    { quantity: "12-pack Cans", price: 9.99 },
+    { quantity: "24-pack Cans", price: 22.99 },
+  ],
+};
 
-const order = [
+const dummyorder = [
   {
-    item: "Bud Light Bottles 6-pack",
-    price: "$6.99",
-    quantity: 3,
+    name: "Bud Light",
+    quantity: "6-pack Bottles",
+    number: 3,
     subtotal: "$19.97",
-  },
-  {
-    item: "Bud Light Cans 24-pack",
-    price: "$12.99",
-    quantity: 1,
-    subtotal: "$12.99",
-  },
-  {
-    item: "Coors Light Bottles 6-pack",
-    price: "$6.99",
-    quantity: 3,
-    subtotal: "$19.97",
-  },
-  {
-    item: "Budweiser Cans 12-pack",
-    price: "$14.99",
-    quantity: 4,
-    subtotal: "$64.96",
-  },
-  {
-    item: "Blue Moon Bottles 6-pack",
-    price: "$19.99",
-    quantity: 2,
-    subtotal: "$39.98",
   },
 ];
 
@@ -66,45 +92,58 @@ const total = [
 ];
 
 function CustomerPage() {
-  const [isOpenBudweiser, setIsOpenBudweiser] = useState(false);
-  const [isOpenCoorsLight, setIsOpenCoorsLight] = useState(false);
-  const [isOpenBudLight, setIsOpenBudLight] = useState(false);
-  const [isOpenBlueMoon, setIsOpenBlueMoon] = useState(false);
-  const [isOpenCorona, setIsOpenCorona] = useState(false);
-  const [isOpenHeineken, setIsOpenHeineken] = useState(false);
-  const [isOpenMichelobUltra, setIsOpenMichelobUltra] = useState(false);
-  const [isOpenMillerLite, setIsOpenMillerLite] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalState, setModalState] = useState({
+    name: "",
+    inventory: [],
+  });
+  const [order, setOrder] = useState({
+    order: [],
+    totalItems: 0,
+    totalPrice: 0,
+  });
 
-  function toggleModalBudweiser() {
-    setIsOpenBudweiser(!isOpenBudweiser);
+  function toggleModal(event) {
+    if (!isOpen) {
+      renderModal(event.target.alt);
+    }
+    setIsOpen(!isOpen);
   }
 
-  function toggleModalCoorsLight() {
-    setIsOpenCoorsLight(!isOpenCoorsLight);
+  function renderModal(beerName) {
+    console.log("beerName", beerName);
+    setModalState({ name: beerName, inventory: [...inventory[beerName]] });
   }
 
-  function toggleModalBudLight() {
-    setIsOpenBudLight(!isOpenBudLight);
-  }
-
-  function toggleModalBlueMoon() {
-    setIsOpenBlueMoon(!isOpenBlueMoon);
-  }
-
-  function toggleModalCorona() {
-    setIsOpenCorona(!isOpenCorona);
-  }
-
-  function toggleModalHeineken() {
-    setIsOpenHeineken(!isOpenHeineken);
-  }
-
-  function toggleModalMichelobUltra() {
-    setIsOpenMichelobUltra(!isOpenMichelobUltra);
-  }
-
-  function toggleModalMillerLite() {
-    setIsOpenMillerLite(!isOpenMillerLite);
+  function handleModalFormSubmit(e) {
+    e.preventDefault();
+    console.log("form event", e);
+    const orderInstance = Array.from(
+      new FormData(document.getElementById("modalForm")),
+      e => e.map(encodeURIComponent).join('=')
+    ).join('&').replace(/%20/g, " ");
+    console.log("orderInstance", orderInstance);
+    var json = toSimpleJson(orderInstance);
+    function toSimpleJson(serializedData) {
+      var ar1 = serializedData.split("&");
+      var json = "{";
+      for (var i = 0; i < ar1.length; i++) {
+        var ar2 = ar1[i].split("=");
+        json += i > 0 ? ", " : "";
+        json += '"' + ar2[0] + '" : ';
+        json += '"' + (ar2.length < 2 ? "" : ar2[1]) + '"';
+      }
+      json += "}";
+      const obj = JSON.parse(json);
+      const objKeys = Object.keys(obj);
+      let newArr = [];
+      for (let i = 0; i < objKeys.length; i++) {
+        if (obj[objKeys[i]] !== "") {
+          newArr.push({ name: objKeys[i], number: obj[objKeys[i]] });
+        }
+      }
+    }
+    console.log("json", json);
   }
 
   return (
@@ -121,71 +160,51 @@ function CustomerPage() {
         </div>
       </div>
       <Modal
-        isOpen={isOpenBudweiser}
-        onRequestClose={toggleModalBudweiser}
-        contentLabel="Bud"
+        isOpen={isOpen}
+        onRequestClose={toggleModal}
+        contentLabel="Inventory Order Screen"
       >
-        <div>Budweiser</div>
+        <form id="modalForm">
+          <div className="modal-title">{modalState.name}</div>
+          {modalState.inventory.map((x) => {
+            return (
+              <div className="row modal-row">
+                <p className="modal-item">{x.quantity}</p>
+                <p className="modal-item">${x.price}</p>
+                <input
+                  name={`${modalState.name} ${x.quantity}`}
+                  data-price={x.price}
+                  type="number"
+                  className="modal-item"
+                />
+              </div>
+            );
+          })}
+          <div className="row modal-footer">
+            <button className="modalButton cancel" onClick={toggleModal}>
+              Cancel
+            </button>
+            <button
+              type="submit"
+              onClick={handleModalFormSubmit}
+              className="modalButton addToCart"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </form>
       </Modal>
-      <Modal
-        isOpen={isOpenCoorsLight}
-        onRequestClose={toggleModalCoorsLight}
-        contentLabel="Coors"
-      >
-        <div>Coors</div>
-      </Modal>
-      <Modal
-        isOpen={isOpenBudLight}
-        onRequestClose={toggleModalBudLight}
-        contentLabel="Bud Light"
-      >
-        <div>Bud Light</div>
-      </Modal>
-      <Modal
-        isOpen={isOpenBlueMoon}
-        onRequestClose={toggleModalBlueMoon}
-        contentLabel="Blue Moon"
-      >
-        <div>Blue Moon</div>
-      </Modal>
-      <Modal
-        isOpen={isOpenCorona}
-        onRequestClose={toggleModalCorona}
-        contentLabel="Corona"
-      >
-        <div>Corona</div>
-      </Modal>
-      <Modal
-        isOpen={isOpenHeineken}
-        onRequestClose={toggleModalHeineken}
-        contentLabel="Heineken"
-      >
-        <div>Heineken</div>
-      </Modal>
-      <Modal
-        isOpen={isOpenMichelobUltra}
-        onRequestClose={toggleModalMichelobUltra}
-        contentLabel="Michelob Ultra"
-      >
-        <div>Michelob Ultra</div>
-      </Modal>
-      <Modal
-        isOpen={isOpenMillerLite}
-        onRequestClose={toggleModalMillerLite}
-        contentLabel="Miller Lite"
-      >
-        <div>Miller Lite</div>
-      </Modal>
+
       <div className="row customer-background">
         <div className="col-sm-8">
           <div className="row text-center">
-            {inventory.map((x) => {
+            {inventory.images.map((x) => {
               return (
                 <img
                   src={x.logo}
                   alt={x.name}
                   className="inventory-card mx-auto"
-                  onClick={toggleModalBudweiser}
+                  onClick={toggleModal}
                 />
               );
             })}
@@ -194,13 +213,12 @@ function CustomerPage() {
         <div className="col-sm-4 mx-auto">
           <div className="shopping-cart">
             <p className="cart-title">Shopping Cart</p>
-            {order.map((x) => {
+            {dummyorder.map((x) => {
               return (
                 <div>
                   <hr></hr>
-                  <p className="cart-sub">Item: {x.item}</p>
-                  <p className="cart-sub">Quantity: {x.quantity}</p>
-                  <p className="cart-sub">Price: {x.price}</p>
+                  <p className="cart-sub">Item: {`${x.name} ${x.quantity}`}</p>
+                  <p className="cart-sub">Quantity: {x.number}</p>
                   <p className="cart-sub">Subtotal: {x.subtotal}</p>
                 </div>
               );
