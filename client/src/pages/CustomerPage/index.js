@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 // stylesheet
 import "./index.css";
-// test data representing the db queries
-import dbInventory from "./customerPageTestData";
+// API functions
+import API from "../../util/API";
 // utility functions
 import customerPageUtil from "./customerPageUtil";
 // modal component from react-modal package
@@ -12,15 +13,28 @@ Modal.setAppElement("#root");
 function CustomerPage() {
   const [inventory, setInventory] = useState({ images: [], beers: {} });
   const [isOpen, setIsOpen] = useState(false);
-  const [modalState, setModalState] = useState({ modalName: "", modalInventory: [] });
-  const [order, setOrder] = useState({ order: [], totalItems: 0, totalPrice: 0 });
+  const [modalState, setModalState] = useState({
+    modalName: "",
+    modalInventory: [],
+  });
+  const [order, setOrder] = useState({
+    order: [],
+    totalItems: 0,
+    totalPrice: 0,
+  });
 
   useEffect(() => {
-    setInventory({
-      images: [...dbInventory.images],
-      beers: dbInventory.beers
-    });
+    loadInventory();
   }, []);
+
+  function loadInventory() {
+    API.getInventory().then((res) => {
+      setInventory({
+        images: [...API.images],
+        beers: res,
+      });
+    });
+  }
 
   function toggleModal(event) {
     if (!isOpen) {
@@ -30,7 +44,10 @@ function CustomerPage() {
   }
 
   function renderModal(beerName) {
-    setModalState({ modalName: beerName, modalInventory: [...inventory.beers[beerName]] });
+    setModalState({
+      modalName: beerName,
+      modalInventory: [...inventory.beers[beerName]],
+    });
   }
 
   function handleModalFormSubmit(e) {
@@ -45,7 +62,11 @@ function CustomerPage() {
       tempTotalItems += parseInt(fullOrderArray[i].quantity);
       tempTotalPrice += parseFloat(fullOrderArray[i].subtotal);
     }
-    setOrder({ order: [...fullOrderArray], totalItems: tempTotalItems, totalPrice: tempTotalPrice });
+    setOrder({
+      order: [...fullOrderArray],
+      totalItems: tempTotalItems,
+      totalPrice: tempTotalPrice,
+    });
 
     toggleModal();
   }
@@ -130,7 +151,7 @@ function CustomerPage() {
             <div className="cart-total">
               <hr></hr>
               <p>Total Items: {order.totalItems}</p>
-              <p>Total: ${(order.totalPrice).toFixed(2)}</p>
+              <p>Total: ${order.totalPrice.toFixed(2)}</p>
             </div>
           </div>
         </div>

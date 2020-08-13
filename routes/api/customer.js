@@ -3,7 +3,8 @@ const userController = require("../../controllers/UserController");
 const orderController = require("../../controllers/OrderController");
 const inventoryController = require("../../controllers/InventoryController");
 
-router.route("/")
-  .get(orderController.findAllActiveOrders);
+router
+  .route("/")
+  .get(inventoryController.findAll)
 
 module.exports = router;
