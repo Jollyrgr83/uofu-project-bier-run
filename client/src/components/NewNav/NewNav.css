@@ -29,6 +29,10 @@
   margin: 10px;
 }
 
+.text-bier, .text-run {
+  font-family: 'Saira Stencil One', cursive;
+}
+
 .text-bier {
   border: solid 4px black;
   background-color: rgb(255, 192, 0);

@@ -1,6 +1,7 @@
 import React from "react"
 import "./NewNav.css"
 import LoginLink from "../LoginLink";
+import "../../assets/fonts/Stencil.ttf"
 // import logo from "../../assets/images/ppt-logo.png"
 
 function NewNav() {
@@ -8,7 +9,7 @@ function NewNav() {
         <mainnav>
             <nav className="navbar navbar-light local-nav-font">
             {/* <nav className="navbar navbar-expand-xl navbar-light local-nav-font"> */}
-                <a className="navbar-brand text-logo" href="/"><span className="text-bier">Bier</span><span className="text-run">Run</span></a>
+                <a className="navbar-brand text-logo" href="/"><span className="text-bier">BIER</span><span className="text-run">RUN</span></a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

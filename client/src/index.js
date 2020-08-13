@@ -5,6 +5,7 @@ import App from "./App.js";
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "@auth0/auth0-react";
 
+
 ReactDOM.render(
   <Auth0Provider
     domain="dev-w193otkg.us.auth0.com"
