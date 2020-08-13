@@ -1,107 +1,26 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+// stylesheet
 import "./index.css";
-
-import bud from "../../assets/bud.jpg";
-import budLight from "../../assets/bud-light.png";
-import coorsLight from "../../assets/coors-light.jpg";
-import blueMoon from "../../assets/blue-moon.jpg";
-import corona from "../../assets/corona.jpg";
-import heineken from "../../assets/heineken.jpg";
-import michelobUltra from "../../assets/michelob-ultra.jpg";
-import millerLite from "../../assets/miller-lite.jpg";
-
+// test data representing the db queries
+import dbInventory from "./customerPageTestData";
+// utility functions
+import customerPageUtil from "./customerPageUtil";
+// modal component from react-modal package
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
-const inventory = {
-  images: [
-    { name: "Budweiser", logo: bud },
-    { name: "Bud Light", logo: budLight },
-    { name: "Coors Light", logo: coorsLight },
-    { name: "Blue Moon", logo: blueMoon },
-    { name: "Corona", logo: corona },
-    { name: "Heineken", logo: heineken },
-    { name: "Michelob Ultra", logo: michelobUltra },
-    { name: "Miller Lite", logo: millerLite },
-  ],
-  Budweiser: [
-    { quantity: "6-pack Bottles", price: 9.99 },
-    { quantity: "12-pack Bottles", price: 18.99 },
-    { quantity: "12-pack Cans", price: 9.99 },
-    { quantity: "24-pack Cans", price: 22.99 },
-  ],
-  "Coors Light": [
-    { quantity: "6-pack Bottles", price: 8.99 },
-    { quantity: "12-pack Bottles", price: 18.99 },
-    { quantity: "12-pack Cans", price: 8.99 },
-    { quantity: "24-pack Cans", price: 28.99 },
-  ],
-  "Bud Light": [
-    { quantity: "6-pack Bottles", price: 9.99 },
-    { quantity: "12-pack Bottles", price: 18.99 },
-    { quantity: "12-pack Cans", price: 9.99 },
-    { quantity: "24-pack Cans", price: 22.99 },
-  ],
-  "Blue Moon": [
-    { quantity: "6-pack Bottles", price: 9.99 },
-    { quantity: "12-pack Bottles", price: 18.99 },
-    { quantity: "12-pack Cans", price: 9.99 },
-    { quantity: "24-pack Cans", price: 22.99 },
-  ],
-  Corona: [
-    { quantity: "6-pack Bottles", price: 9.99 },
-    { quantity: "12-pack Bottles", price: 18.99 },
-    { quantity: "12-pack Cans", price: 9.99 },
-    { quantity: "24-pack Cans", price: 22.99 },
-  ],
-  Heineken: [
-    { quantity: "6-pack Bottles", price: 9.99 },
-    { quantity: "12-pack Bottles", price: 18.99 },
-    { quantity: "12-pack Cans", price: 9.99 },
-    { quantity: "24-pack Cans", price: 22.99 },
-  ],
-  "Michelob Ultra": [
-    { quantity: "6-pack Bottles", price: 9.99 },
-    { quantity: "12-pack Bottles", price: 18.99 },
-    { quantity: "12-pack Cans", price: 9.99 },
-    { quantity: "24-pack Cans", price: 22.99 },
-  ],
-  "Miller Lite": [
-    { quantity: "6-pack Bottles", price: 9.99 },
-    { quantity: "12-pack Bottles", price: 18.99 },
-    { quantity: "12-pack Cans", price: 9.99 },
-    { quantity: "24-pack Cans", price: 22.99 },
-  ],
-};
-
-const dummyorder = [
-  {
-    name: "Bud Light",
-    quantity: "6-pack Bottles",
-    number: 3,
-    subtotal: "$19.97",
-  },
-];
-
-const total = [
-  {
-    items: 13,
-    price: "$109.98",
-  },
-];
-
 function CustomerPage() {
+  const [inventory, setInventory] = useState({ images: [], beers: {} });
   const [isOpen, setIsOpen] = useState(false);
-  const [modalState, setModalState] = useState({
-    name: "",
-    inventory: [],
-  });
-  const [order, setOrder] = useState({
-    order: [],
-    totalItems: 0,
-    totalPrice: 0,
-  });
+  const [modalState, setModalState] = useState({ modalName: "", modalInventory: [] });
+  const [order, setOrder] = useState({ order: [], totalItems: 0, totalPrice: 0 });
+
+  useEffect(() => {
+    setInventory({
+      images: [...dbInventory.images],
+      beers: dbInventory.beers
+    });
+  }, []);
 
   function toggleModal(event) {
     if (!isOpen) {
@@ -111,39 +30,24 @@ function CustomerPage() {
   }
 
   function renderModal(beerName) {
-    console.log("beerName", beerName);
-    setModalState({ name: beerName, inventory: [...inventory[beerName]] });
+    setModalState({ modalName: beerName, modalInventory: [...inventory.beers[beerName]] });
   }
 
   function handleModalFormSubmit(e) {
     e.preventDefault();
-    console.log("form event", e);
-    const orderInstance = Array.from(
-      new FormData(document.getElementById("modalForm")),
-      e => e.map(encodeURIComponent).join('=')
-    ).join('&').replace(/%20/g, " ");
-    console.log("orderInstance", orderInstance);
-    var json = toSimpleJson(orderInstance);
-    function toSimpleJson(serializedData) {
-      var ar1 = serializedData.split("&");
-      var json = "{";
-      for (var i = 0; i < ar1.length; i++) {
-        var ar2 = ar1[i].split("=");
-        json += i > 0 ? ", " : "";
-        json += '"' + ar2[0] + '" : ';
-        json += '"' + (ar2.length < 2 ? "" : ar2[1]) + '"';
-      }
-      json += "}";
-      const obj = JSON.parse(json);
-      const objKeys = Object.keys(obj);
-      let newArr = [];
-      for (let i = 0; i < objKeys.length; i++) {
-        if (obj[objKeys[i]] !== "") {
-          newArr.push({ name: objKeys[i], number: obj[objKeys[i]] });
-        }
-      }
+    const addToOrderObj = customerPageUtil.addToOrderInstance();
+    const orderJSON = customerPageUtil.toSimpleJSON(addToOrderObj);
+    const updateArr = customerPageUtil.removeBlankEntries(orderJSON);
+    const fullOrderArray = [...order.order, ...updateArr];
+    let tempTotalItems = 0;
+    let tempTotalPrice = 0;
+    for (let i = 0; i < fullOrderArray.length; i++) {
+      tempTotalItems += parseInt(fullOrderArray[i].quantity);
+      tempTotalPrice += parseFloat(fullOrderArray[i].subtotal);
     }
-    console.log("json", json);
+    setOrder({ order: [...fullOrderArray], totalItems: tempTotalItems, totalPrice: tempTotalPrice });
+
+    toggleModal();
   }
 
   return (
@@ -165,15 +69,14 @@ function CustomerPage() {
         contentLabel="Inventory Order Screen"
       >
         <form id="modalForm">
-          <div className="modal-title">{modalState.name}</div>
-          {modalState.inventory.map((x) => {
+          <div className="modal-title">{modalState.modalName}</div>
+          {modalState.modalInventory.map((x) => {
             return (
-              <div className="row modal-row">
+              <div className="row modal-row" key={x.id}>
                 <p className="modal-item">{x.quantity}</p>
                 <p className="modal-item">${x.price}</p>
                 <input
-                  name={`${modalState.name} ${x.quantity}`}
-                  data-price={x.price}
+                  name={`${modalState.modalName},${x.quantity},${x.price}`}
                   type="number"
                   className="modal-item"
                 />
@@ -201,6 +104,7 @@ function CustomerPage() {
             {inventory.images.map((x) => {
               return (
                 <img
+                  key={x.id}
                   src={x.logo}
                   alt={x.name}
                   className="inventory-card mx-auto"
@@ -213,25 +117,21 @@ function CustomerPage() {
         <div className="col-sm-4 mx-auto">
           <div className="shopping-cart">
             <p className="cart-title">Shopping Cart</p>
-            {dummyorder.map((x) => {
+            {order.order.map((x) => {
               return (
-                <div>
+                <div key={x.id}>
                   <hr></hr>
-                  <p className="cart-sub">Item: {`${x.name} ${x.quantity}`}</p>
-                  <p className="cart-sub">Quantity: {x.number}</p>
+                  <p className="cart-sub">Item: {`${x.name}`}</p>
+                  <p className="cart-sub">Quantity: {x.quantity}</p>
                   <p className="cart-sub">Subtotal: {x.subtotal}</p>
                 </div>
               );
             })}
-            {total.map((x) => {
-              return (
-                <div className="cart-total">
-                  <hr></hr>
-                  <p>Total Items: {x.items}</p>
-                  <p>Total: {x.price}</p>
-                </div>
-              );
-            })}
+            <div className="cart-total">
+              <hr></hr>
+              <p>Total Items: {order.totalItems}</p>
+              <p>Total: ${order.totalPrice}</p>
+            </div>
           </div>
         </div>
       </div>
