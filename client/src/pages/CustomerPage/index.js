@@ -130,7 +130,7 @@ function CustomerPage() {
             <div className="cart-total">
               <hr></hr>
               <p>Total Items: {order.totalItems}</p>
-              <p>Total: ${order.totalPrice}</p>
+              <p>Total: ${(order.totalPrice).toFixed(2)}</p>
             </div>
           </div>
         </div>

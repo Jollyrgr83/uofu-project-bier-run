@@ -8,8 +8,8 @@ function NewNav() {
     <div>
       <nav className="navbar navbar-light local-nav-font">
         <a className="navbar-brand text-logo" href="/">
-          <span className="text-bier">Bier</span>
-          <span className="text-run">Run</span>
+          <span className="text-bier">BIER</span>
+          <span className="text-run">RUN</span>
         </a>
         <button
           className="navbar-toggler"
