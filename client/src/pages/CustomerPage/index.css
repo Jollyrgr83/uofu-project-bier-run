@@ -1,5 +1,5 @@
 .message-container {
-  background-color: rgb(255, 249, 229);
+  background-color: rgb(230, 230, 230);
 }
 
 .welcome {
@@ -33,7 +33,7 @@
 }
 
 .customer-background {
-  background-color: rgb(255, 249, 229);
+  background-color: rgb(230, 230, 230);
 }
 
 .cart-title {
@@ -49,4 +49,48 @@
 .cart-total {
   width: 100%;
   text-align: end;
+}
+
+.modal-title {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  font-size: 24px;
+  width: 90%;
+}
+
+.modal-row {
+  font-family: "Montserrat", sans-serif;
+  text-align: left;
+  font-size: 16px;
+  width: 90%;
+}
+
+.modal-item {
+  width: 20%;
+}
+
+.cancel {
+  background-color: red;
+}
+
+.addToCart {
+  background-color: blue;
+}
+
+.modalButton {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  width: 100px;
+  color: white;
+}
+
+.modalButton:active, .modalButton:enabled {
+  outline: none;
+}
+.modalButton:hover {
+  outline: none;
+  opacity: 0.7;
 }
