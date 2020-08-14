@@ -5,6 +5,18 @@ import "./index.css";
 import API from "../../util/API";
 // modal component from react-modal package
 import Modal from "react-modal";
+// style attributes for modal window
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
+
 Modal.setAppElement("#root");
 
 // const orderSchema = new Schema({
@@ -235,6 +247,7 @@ function DriverPage() {
         isOpen={isOpen}
         onRequestClose={toggleModal}
         contentLabel="Estimated Delivery Time"
+        style={customStyles}
       >
         <div className="mx-auto my-auto">
           <div className="modal-title-driver mx-auto">

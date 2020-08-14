@@ -7,6 +7,18 @@ import API from "../../util/API";
 import customerPageUtil from "./customerPageUtil";
 // modal component from react-modal package
 import Modal from "react-modal";
+// style attributes for modal window
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
+
 Modal.setAppElement("#root");
 
 function CustomerPage() {
@@ -115,6 +127,7 @@ function CustomerPage() {
         isOpen={isOpen}
         onRequestClose={toggleModal}
         contentLabel="Inventory Order Screen"
+        style={customStyles}
       >
         <form id="modalForm" className="text-center mx-auto">
           <div className="modal-title mx-auto">{modalState.modalName}</div>
