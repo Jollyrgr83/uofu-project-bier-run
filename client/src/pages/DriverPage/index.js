@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 // API functions
 import API from "../../util/API";
+// authentication
+import { useAuth0 } from "@auth0/auth0-react";
 // modal component from react-modal package
 import Modal from "react-modal";
 // style attributes for modal window
@@ -50,6 +52,7 @@ const dummyOrders = [
 const dummyState = false;
 
 function DriverPage() {
+  const { user, isAuthenticated } = useAuth0(); 
   const [welcomeMessage, setWelcomeMessage] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [deliveryState, setDeliveryState] = useState();
@@ -114,162 +117,164 @@ function DriverPage() {
   }
 
   return (
-    <div className="driver-main-container">
-      <div className="row welcome-container mx-auto">
-        <div className="col-sm-8">
-          <div className="mx-auto">
-            Welcome [username],
-            <br />
-            You have [#] active deliveries.
-            <br />
-            Your current status is:
-            <span
-              className={
-                deliveryState
-                  ? "status active mx-auto"
-                  : "status inactive mx-auto"
-              }
-            >
-              {deliveryState ? " Active" : " Inactive"}
-            </span>
+    isAuthenticated && (
+      <div className="driver-main-container">
+        <div className="row welcome-container mx-auto">
+          <div className="col-sm-8">
+            <div className="mx-auto">
+              Welcome [username],
+              <br />
+              You have [#] active deliveries.
+              <br />
+              Your current status is:
+              <span
+                className={
+                  deliveryState
+                    ? "status active mx-auto"
+                    : "status inactive mx-auto"
+                }
+              >
+                {deliveryState ? " Active" : " Inactive"}
+              </span>
+            </div>
+          </div>
+          <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
+            {deliveryState ? (
+              <button
+                onClick={updateDriverStatus}
+                className="driver-button red mx-auto my-auto"
+              >
+                Stop Delivering
+              </button>
+            ) : (
+              <button
+                onClick={updateDriverStatus}
+                className="driver-button green mx-auto my-auto"
+              >
+                Start Delivering
+              </button>
+            )}
           </div>
         </div>
-        <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
-          {deliveryState ? (
-            <button
-              onClick={updateDriverStatus}
-              className="driver-button red mx-auto my-auto"
-            >
-              Stop Delivering
-            </button>
-          ) : (
-            <button
-              onClick={updateDriverStatus}
-              className="driver-button green mx-auto my-auto"
-            >
-              Start Delivering
-            </button>
-          )}
-        </div>
+        {orders.sortedOrders.map((x) => {
+          if (x.inProgress === true) {
+            return (
+              <div className="row order-card-selected mx-auto" key={x.id}>
+                <div className="col-sm-8">
+                  <div className="row">
+                    <div className="col-sm-4 order-item">
+                      Order ID:
+                      <br />
+                      {x.id}
+                    </div>
+                    <div className="col-sm-4 order-item">
+                      Price:
+                      <br />${x.totalPrice}
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-4 order-item">
+                      Order Details:
+                      <br />
+                      <a href="">{x.id}</a>
+                    </div>
+                    <div className="col-sm-4 order-item">
+                      Address:
+                      <br />
+                      {x.address}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
+                  <button
+                    onClick={unselectOrder}
+                    className="driver-button red mx-auto"
+                  >
+                    Unselect
+                  </button>
+                  <button
+                    onClick={toggleModal}
+                    className="driver-button blue mx-auto"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={deliverOrder}
+                    className="driver-button green mx-auto"
+                  >
+                    Delivered
+                  </button>
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <div className="row order-card mx-auto" key={x.id}>
+                <div className="col-sm-8">
+                  <div className="row">
+                    <div className="col-sm-4 order-item">
+                      Order ID:
+                      <br />
+                      {x.id}
+                    </div>
+                    <div className="col-sm-4 order-item">
+                      Price:
+                      <br />${x.totalPrice}
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-4 order-item">
+                      Order Details:
+                      <br />
+                      <a href="">{x.id}</a>
+                    </div>
+                    <div className="col-sm-4 order-item">
+                      Address:
+                      <br />
+                      {x.address}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
+                  <button
+                    onClick={selectOrder}
+                    className="driver-button blue mx-auto"
+                  >
+                    Select
+                  </button>
+                </div>
+              </div>
+            );
+          }
+        })}
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={toggleModal}
+          contentLabel="Estimated Delivery Time"
+          style={customStyles}
+        >
+          <div className="mx-auto my-auto">
+            <div className="modal-title-driver mx-auto">
+              Enter an estimated delivery time (in minutes):
+            </div>
+            <div className="text-center mx-auto">
+              <input
+                type="number"
+                name="deliveryTime"
+                className="modal-input mx-auto"
+              />
+              <button
+                type="submit"
+                onClick={updateDeliveryTime}
+                className="driver-button blue modal-button mx-auto"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </Modal>
       </div>
-      {orders.sortedOrders.map((x) => {
-        if (x.inProgress === true) {
-          return (
-            <div className="row order-card-selected mx-auto" key={x.id}>
-              <div className="col-sm-8">
-                <div className="row">
-                  <div className="col-sm-4 order-item">
-                    Order ID:
-                    <br />
-                    {x.id}
-                  </div>
-                  <div className="col-sm-4 order-item">
-                    Price:
-                    <br />${x.totalPrice}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-4 order-item">
-                    Order Details:
-                    <br />
-                    <a href="">{x.id}</a>
-                  </div>
-                  <div className="col-sm-4 order-item">
-                    Address:
-                    <br />
-                    {x.address}
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
-                <button
-                  onClick={unselectOrder}
-                  className="driver-button red mx-auto"
-                >
-                  Unselect
-                </button>
-                <button
-                  onClick={toggleModal}
-                  className="driver-button blue mx-auto"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={deliverOrder}
-                  className="driver-button green mx-auto"
-                >
-                  Delivered
-                </button>
-              </div>
-            </div>
-          );
-        } else {
-          return (
-            <div className="row order-card mx-auto" key={x.id}>
-              <div className="col-sm-8">
-                <div className="row">
-                  <div className="col-sm-4 order-item">
-                    Order ID:
-                    <br />
-                    {x.id}
-                  </div>
-                  <div className="col-sm-4 order-item">
-                    Price:
-                    <br />${x.totalPrice}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-4 order-item">
-                    Order Details:
-                    <br />
-                    <a href="">{x.id}</a>
-                  </div>
-                  <div className="col-sm-4 order-item">
-                    Address:
-                    <br />
-                    {x.address}
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
-                <button
-                  onClick={selectOrder}
-                  className="driver-button blue mx-auto"
-                >
-                  Select
-                </button>
-              </div>
-            </div>
-          );
-        }
-      })}
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="Estimated Delivery Time"
-        style={customStyles}
-      >
-        <div className="mx-auto my-auto">
-          <div className="modal-title-driver mx-auto">
-            Enter an estimated delivery time (in minutes):
-          </div>
-          <div className="text-center mx-auto">
-            <input
-              type="number"
-              name="deliveryTime"
-              className="modal-input mx-auto"
-            />
-            <button
-              type="submit"
-              onClick={updateDeliveryTime}
-              className="driver-button blue modal-button mx-auto"
-            >
-              Update
-            </button>
-          </div>
-        </div>
-      </Modal>
-    </div>
+    )
   );
 }
 

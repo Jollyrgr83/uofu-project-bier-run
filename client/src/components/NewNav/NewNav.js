@@ -1,6 +1,7 @@
 import React from "react";
 import "./NewNav.css";
 import LoginLink from "../LoginLink";
+import LogoutLink from "../LogoutLink";
 import "../../assets/fonts/Stencil.ttf"
 
 function NewNav() {
@@ -52,7 +53,15 @@ function NewNav() {
                 </a>
               </li>
               <li className="nav-item">
+                <a className="nav-link" href="/auth">
+                  Auth (testing)
+                </a>
+              </li>
+              <li className="nav-item">
                 <LoginLink />
+              </li>
+              <li className="nav-item">
+                <LogoutLink />
               </li>
             </ul>
           </div>
