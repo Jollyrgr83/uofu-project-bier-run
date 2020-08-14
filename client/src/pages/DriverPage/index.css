@@ -7,7 +7,11 @@
 /* message elements (top row) */
 .welcome-container {
   font-family: "Montserrat", sans-serif;
-  font-size: 21px;
+  font-size: 16px;
+  border: solid 1px black;
+  box-shadow: 3px 3px 6px black;
+  background-color: rgb(230, 230, 230);
+  border-radius: 5px;
   padding: 10px;
   margin: 15px;
 }

@@ -104,7 +104,7 @@ function DriverPage() {
   return (
     <div className="driver-main-container">
       <div className="row welcome-container mx-auto">
-        <div className="col-sm-8 mx-auto">
+        <div className="col-sm-8">
           <div className="mx-auto">
             Welcome [username],
             <br />
