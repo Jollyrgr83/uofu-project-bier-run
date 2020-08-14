@@ -12,23 +12,27 @@ Modal.setAppElement("#root");
 function CustomerPage() {
   const [inventory, setInventory] = useState({ images: [], beers: {} });
   const [isOpen, setIsOpen] = useState(false);
-  const [modalState, setModalState] = useState({
-    modalName: "",
-    modalInventory: [],
-  });
-  const [order, setOrder] = useState({
-    order: [],
-    totalItems: 0,
-    totalPrice: 0,
-  });
-  const [placeOrderMessage, setPlaceOrderMessage] = useState({
-    text: "",
-    isShow: false
-  });
+  const [modalState, setModalState] = useState({ modalName: "", modalInventory: [] });
+  const [order, setOrder] = useState({ order: [], totalItems: 0, totalPrice: 0 });
+  const [welcomeMessage, setWelcomeMessage] = useState({ username: "", address: "" });
+  const [orderMessage, setOrderMessage] = useState({ text: "", orderID: "", arrivalTime: "" });
+  const [placeOrderMessage, setPlaceOrderMessage] = useState({ text: "", isShow: false });
 
   useEffect(() => {
     loadInventory();
   }, []);
+
+  function loadUserWelcome() {
+    API.getUserData().then(res => {
+      
+    });
+  }
+
+  function loadUserOrderMessage() {
+    API.getUserOrderData().then(res => {
+
+    });
+  }
 
   function loadInventory() {
     API.getInventory().then((res) => {

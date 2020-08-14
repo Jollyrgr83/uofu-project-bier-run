@@ -14,43 +14,30 @@ import "./index.css";
 //   date: { type: Date, default: Date.now }
 // });
 
-const orderDB = {
-  cost: 99.99,
-  description: "6 pack Bud Light",
-};
-
 const dummyOrders = [
   {
-    id: 1,
-    name: "Bob Smith",
-    details: [orderDB],
+    id: "5f35cf06ca4b11d8d4f53288",
     address: "123 Any Street, SLC, UT",
     inProgress: false,
+    totalPrice: 109.96
   },
 
   {
-    id: 2,
-    name: "Dave Johnson",
-    details: [orderDB],
+    id: "5f35cf06ca4b11d8d4f53289",
     address: "123 Any Street, SLC, UT",
     inProgress: true,
+    totalPrice: 112.76
   },
 ];
 
 function DriverPage() {
   return (
-    <div>
+    <div className="driver-main-container">
       <div className="row">
         <div className="col-sm-5 welcome-container mx-auto">
           <p className="driver-welcome mx-auto">
             Welcome [username], your current status is: [status]
           </p>
-        </div>
-        <div className="col-sm-2 toggle-container">
-          <label className="switch mx-auto text-center">
-            <input type="checkbox" />
-            <span className="slider round"></span>
-          </label>
         </div>
         <div className="col-sm-5 order-container mx-auto">
           <p className="driver-orders mx-auto">
@@ -59,28 +46,45 @@ function DriverPage() {
         </div>
       </div>
       {dummyOrders.map((x) => {
-        if (x.inProgess) {
+        if (x.inProgress === true) {
           return (
-            <div className="row" key={x.id}>
+            <div className="row order-card-selected mx-auto" key={x.id}>
               <div className="col-sm-8">
-                <p className="order-card-selected">
-                  {`${x.id} ${x.name} ${x.details} ${x.address}`}
-                </p>
-                <button className="driver-select-button">Select</button>
+                <div className="row">
+                  <div className="col-sm-4 order-item">Order ID:<br/>{x.id}</div>
+                  <div className="col-sm-4 order-item">Price:<br/>${x.totalPrice}</div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4 order-item">Order Details:<br/><a href="">{x.id}</a></div>
+                  <div className="col-sm-4 order-item">Address:<br/>{x.address}</div>
+                </div>
+              </div>
+              <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
+                <button className="driver-button red mx-auto">Unselect</button>
+                <button className="driver-button blue mx-auto">Update</button>
+                <button className="driver-button green mx-auto">Delivered</button>
               </div>
             </div>
           );
-        } else
+        } else {
           return (
-            <div className="row" key={x.id}>
+            <div className="row order-card mx-auto" key={x.id}>
               <div className="col-sm-8">
-                <p className="order-card">
-                {`${x.id} ${x.name} ${x.details} ${x.address}`}
-                </p>
-                <button className="driver-select-button">Select</button>
+                <div className="row">
+                  <div className="col-sm-4 order-item">Order ID:<br/>{x.id}</div>
+                  <div className="col-sm-4 order-item">Price:<br/>${x.totalPrice}</div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4 order-item">Order Details:<br/><a href="">{x.id}</a></div>
+                  <div className="col-sm-4 order-item">Address:<br/>{x.address}</div>
+                </div>
+              </div>
+              <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
+                <button className="driver-button blue mx-auto">Select</button>
               </div>
             </div>
           );
+        }
       })}
     </div>
   );
