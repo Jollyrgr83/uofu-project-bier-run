@@ -5,6 +5,7 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import DriverPage from "./pages/DriverPage";
 import CustomerPage from "./pages/CustomerPage";
+import User from "./components/User";
 import NewNav from "./components/NewNav/NewNav.js"
 
 
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route exact path={["/pricing"]}>
             <HomePage />
+          </Route>
+          <Route exact path={["/auth"]}>
+            <User />
           </Route>
         </Switch>
       </div>
