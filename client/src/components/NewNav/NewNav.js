@@ -33,16 +33,6 @@ function NewNav() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/features">
-                  Features
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/pricing">
-                  Pricing
-                </a>
-              </li>
-              <li className="nav-item">
                 <a className="nav-link" href="/driver">
                   Driver Page (testing)
                 </a>
