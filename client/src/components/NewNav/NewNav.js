@@ -1,10 +1,16 @@
 import React from "react";
+// stylesheet
 import "./NewNav.css";
+// authentication
+import { useAuth0 } from "@auth0/auth0-react";
+// page components
 import LoginLink from "../LoginLink";
 import LogoutLink from "../LogoutLink";
+// stencil font for text logo
 import "../../assets/fonts/Stencil.ttf"
 
 function NewNav() {
+  const { user, isAuthenticated } = useAuth0();
   return (
     <div>
       <nav className="navbar navbar-light local-nav-font">
@@ -32,32 +38,27 @@ function NewNav() {
                   Home <span className="sr-only">(current)</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/features">
-                  Features
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/pricing">
-                  Pricing
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/driver">
-                  Driver Page (testing)
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/customer">
-                  Customer Page (testing)
-                </a>
-              </li>
-              <li className="nav-item">
-                <LoginLink />
-              </li>
-              <li className="nav-item">
-                <LogoutLink />
-              </li>
+              {isAuthenticated ? (
+                <div>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/driver">
+                      Driver Page (testing)
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/customer">
+                      Place an Order
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <LogoutLink />
+                  </li>
+                </div>
+              ) : (
+                <li className="nav-item">
+                  <LoginLink />
+                </li>
+              )}
             </ul>
           </div>
           <div className="col-sm-6"></div>

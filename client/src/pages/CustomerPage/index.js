@@ -49,6 +49,7 @@ function CustomerPage() {
     text: "",
     isShow: false,
   });
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
   useEffect(() => {
     loadInventory();
@@ -76,6 +77,10 @@ function CustomerPage() {
       renderModal(event.target.alt);
     }
     setIsOpen(!isOpen);
+  }
+
+  function toggleAddressModal(event) {
+    setIsAddressModalOpen(!isAddressModalOpen);
   }
 
   function renderModal(beerName) {
@@ -178,7 +183,14 @@ function CustomerPage() {
             </div>
           </form>
         </Modal>
-
+        <Modal
+          isOpen={isAddressModalOpen}
+          onRequestClose={toggleAddressModal}
+          contentLabel="Enter Address Screen"
+          style={customStyles}
+        >
+          <div>Address Modal</div>
+        </Modal>
         <div className="row customer-background">
           <div className="col-sm-8">
             <div className="row text-center">
@@ -212,7 +224,7 @@ function CustomerPage() {
                 <hr></hr>
                 <p>Total Items: {order.totalItems}</p>
                 <p>Total: ${order.totalPrice.toFixed(2)}</p>
-                <button className="orderButton" onClick={placeOrder}>
+                <button className="orderButton" onClick={toggleAddressModal}>
                   Place Order
                 </button>
                 <p
