@@ -1,13 +1,13 @@
 import axios from "axios";
 // logo images
-import bud from "../assets/bud.jpg";
-import budLight from "../assets/bud-light.png";
-import coorsLight from "../assets/coors-light.jpg";
-import blueMoon from "../assets/blue-moon.jpg";
-import corona from "../assets/corona.jpg";
-import heineken from "../assets/heineken.jpg";
-import michelobUltra from "../assets/michelob-ultra.jpg";
-import millerLite from "../assets/miller-lite.jpg";
+import bud from "../assets/logos/bud.jpg";
+import budLight from "../assets/logos/bud-light.png";
+import coorsLight from "../assets/logos/coors-light.jpg";
+import blueMoon from "../assets/logos/blue-moon.jpg";
+import corona from "../assets/logos/corona.jpg";
+import heineken from "../assets/logos/heineken.jpg";
+import michelobUltra from "../assets/logos/michelob-ultra.jpg";
+import millerLite from "../assets/logos/miller-lite.jpg";
 
 export default {
   // logo images

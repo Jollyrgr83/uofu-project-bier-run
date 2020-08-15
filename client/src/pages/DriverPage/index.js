@@ -1,6 +1,8 @@
+// DRIVERPAGE
+// react
 import React, { useState, useEffect } from "react";
 // stylesheet
-import "./index.css";
+import "./DriverPage.css";
 // API functions
 import API from "../../util/API";
 // authentication
@@ -52,18 +54,23 @@ const dummyOrders = [
 const dummyState = false;
 
 function DriverPage() {
+  // authentication
   const { user, isAuthenticated } = useAuth0(); 
+  // user info for welcome message in top row
   const [welcomeMessage, setWelcomeMessage] = useState();
+  // ETA modal open state
   const [isOpen, setIsOpen] = useState(false);
+  // stores users delivery state (active/inactive)
   const [deliveryState, setDeliveryState] = useState();
+  // stores orders from API call
   const [orders, setOrders] = useState({
     sortedOrders: [],
   });
-
+  // useEffect to load orders from API on page load
   useEffect(() => {
     loadOrders();
   }, []);
-
+  // loads orders from API and sorts based on selected status
   function loadOrders() {
     const sortedArray = dummyOrders.sort((a, b) => {
       if (a.inProgress > b.inProgress) {
@@ -78,45 +85,46 @@ function DriverPage() {
     });
     loadUserData();
   }
-
+  // loads user info from API call and updates welcome message in top row
   function loadUserData() {
     // get user info from login and database
     // use setWelcomeMessage to set { username: username, status: status, numberOfActiveOrders: numberOfActiveOrders }
     setDeliveryState(dummyState);
   }
-
+  // handles ETA modal open/close
   function toggleModal() {
     setIsOpen(!isOpen);
   }
-
+  // updates order status as selected to API
   function selectOrder() {
     // use API to update order's inProgress to true and send to database
     // trigger loadOrders to refresh order list
     toggleModal();
   }
-
+  // updates order ETA to API
   function updateDeliveryTime(event) {
     // event.preventDefault();
     toggleModal();
   }
-
+  // updates order delivered status to API
   function deliverOrder() {
     // use API to update order status as delivered
     // trigger loadOrders to refresh order list
   }
-
+  // updates order status as unselected to API
   function unselectOrder() {
     // use API to update order's inProgress to false
     // trigger loadOrders to refresh order list
   }
-
+  // updates drivers delivery status to API
   function updateDriverStatus() {
     // use API to update driver status
     // trigger loadUserData to refresh user data
     setDeliveryState(!deliveryState);
   }
-
+  // page render
   return (
+    // protected route - only renders after successful login
     isAuthenticated && (
       <div className="driver-main-container">
         <div className="row welcome-container mx-auto">

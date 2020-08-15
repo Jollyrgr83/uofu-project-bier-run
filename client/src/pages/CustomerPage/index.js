@@ -1,10 +1,12 @@
+// CUSTOMERPAGE
+// react
 import React, { useState, useEffect } from "react";
 // stylesheet
-import "./index.css";
+import "./CustomerPage.css";
 // API functions
 import API from "../../util/API";
 // utility functions
-import customerPageUtil from "./customerPageUtil";
+import customerPageUtil from "../../util/customerPageUtil";
 // authentication
 import { useAuth0 } from "@auth0/auth0-react";
 // modal component from react-modal package
@@ -24,40 +26,51 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function CustomerPage() {
+  // authentication
   const { user, isAuthenticated, loading } = useAuth0();
+  // inventory elements (logos, names, and quantity options)
   const [inventory, setInventory] = useState({ images: [], beers: {} });
+  // beer selection modal open state
   const [isOpen, setIsOpen] = useState(false);
+  // beer name, inventory, and quantity options for the selected beer modal
   const [modalState, setModalState] = useState({
     modalName: "",
     modalInventory: [],
   });
+  // order details for shopping cart
   const [order, setOrder] = useState({
     order: [],
     totalItems: 0,
     totalPrice: 0,
   });
+  // user info for welcome message in top row
   const [welcomeMessage, setWelcomeMessage] = useState({
     username: "",
     address: "",
   });
+  // order info for order status message in top row
   const [orderMessage, setOrderMessage] = useState({
     text: "",
     orderID: "",
     arrivalTime: "",
   });
+  // order info for shopping cart message after submitting order
   const [placeOrderMessage, setPlaceOrderMessage] = useState({
     text: "",
     isShow: false,
   });
+  // enter address modal open state 
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  // user input for delivery address from enter address modal
   const [addressInfo, setAddressInfo] = useState({
     street: "",
     city: "",
     state: "",
     zip: ""
   });
-
+  // useEffect to load beer inventory from API on page load
   useEffect(() => {
+    // TROUBLESHOOTING PAGE LOAD AND LOGIN ISSUES HERE******
     // const doSomething = async () => {
     //   console.log(isAuthenticated);
     // };
@@ -77,15 +90,16 @@ function CustomerPage() {
   }
 
   function loadInventory() {
-    console.log("isAuthenticated: ", isAuthenticated);
+    console.log("isAuthenticated before setInventory: ", isAuthenticated);
     API.getInventory().then((res) => {
       setInventory({
         images: [...API.images],
         beers: res,
       });
+      console.log("isAuthenticated after setInventory: ", isAuthenticated);
     });
   }
-
+  // capture user inputs from enter address modal
   function handleInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -93,25 +107,25 @@ function CustomerPage() {
       [name]: value
     });
   }
-
+  // handles beer selection modal open/close
   function toggleModal(event) {
     if (!isOpen) {
       renderModal(event.target.alt);
     }
     setIsOpen(!isOpen);
   }
-
+  // handles enter address modal open/close
   function toggleAddressModal(event) {
     setIsAddressModalOpen(!isAddressModalOpen);
   }
-
+  // renders beer selection modal based on selection 
   function renderModal(beerName) {
     setModalState({
       modalName: beerName,
       modalInventory: [...inventory.beers[beerName]],
     });
   }
-
+  // uses util functions to convert order selections to shopping cart object
   function handleModalFormSubmit(e) {
     e.preventDefault();
     const addToOrderObj = customerPageUtil.addToOrderInstance();
@@ -132,7 +146,7 @@ function CustomerPage() {
 
     toggleModal();
   }
-
+  // captures shopping cart object and sends to API
   function placeOrder(e) {
     e.preventDefault();
     if (order.totalItems === 0) {
@@ -154,8 +168,9 @@ function CustomerPage() {
       });
     }
   }
-
+  // page render
   return (
+    // protected route - only renders after successful login
     isAuthenticated && (
       <div className="main-container">
         <div className="row message-container">

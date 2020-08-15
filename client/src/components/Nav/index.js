@@ -1,15 +1,18 @@
+// NAV COMPONENT
+// react
 import React from "react";
 // stylesheet
-import "./NewNav.css";
+import "./Nav.css";
 // authentication
 import { useAuth0 } from "@auth0/auth0-react";
 // page components
-import LoginLink from "../LoginLink";
-import LogoutLink from "../LogoutLink";
+import LoginLink from "../Links/LoginLink";
+import LogoutLink from "../Links/LogoutLink";
 // stencil font for text logo
-import "../../assets/fonts/Stencil.ttf"
+import "../../assets/fonts/Stencil.ttf";
 
-function NewNav() {
+function Nav() {
+  // authentication
   const { user, isAuthenticated } = useAuth0();
   return (
     <div>
@@ -29,7 +32,6 @@ function NewNav() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse" id="navbarColor01">
           <div className="col-sm-6">
             <ul className="navbar-nav text-end">
@@ -68,4 +70,4 @@ function NewNav() {
   );
 }
 
-export default NewNav;
+export default Nav;
