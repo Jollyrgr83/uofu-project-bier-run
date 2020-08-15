@@ -134,3 +134,22 @@
 .hide {
   display: none;
 }
+
+/* address modal elements */
+.address-modal-input {
+  width: 90%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+
+.address-modal-label {
+  width: 90%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+}
+
+.address-model-title {
+  width: 90%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+}

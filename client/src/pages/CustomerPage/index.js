@@ -49,6 +49,13 @@ function CustomerPage() {
     text: "",
     isShow: false,
   });
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [addressInfo, setAddressInfo] = useState({
+    street: "",
+    city: "",
+    state: "",
+    zip: ""
+  });
 
   useEffect(() => {
     loadInventory();
@@ -71,11 +78,23 @@ function CustomerPage() {
     });
   }
 
+  function handleInputChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    setAddressInfo({
+      [name]: value
+    });
+  }
+
   function toggleModal(event) {
     if (!isOpen) {
       renderModal(event.target.alt);
     }
     setIsOpen(!isOpen);
+  }
+
+  function toggleAddressModal(event) {
+    setIsAddressModalOpen(!isAddressModalOpen);
   }
 
   function renderModal(beerName) {
@@ -178,7 +197,25 @@ function CustomerPage() {
             </div>
           </form>
         </Modal>
-
+        <Modal
+          isOpen={isAddressModalOpen}
+          onRequestClose={toggleAddressModal}
+          contentLabel="Enter Address Screen"
+          style={customStyles}
+        >
+          <div>
+            <div className="address-modal-title">Enter Your Address:</div>
+            <div className="address-modal-label">Street Address:</div>
+            <input className="address-modal-input" name="street" type="text" onChange={handleInputChange} />
+            <div className="address-modal-label">City:</div>
+            <input className="address-modal-input" name="city" type="text" onChange={handleInputChange} />
+            <div className="address-modal-label">State:</div>
+            <input className="address-modal-input" name="state" type="text" onChange={handleInputChange} />
+            <div className="address-modal-label">Zip Code:</div>
+            <input className="address-modal-input" name="zip" type="text" onChange={handleInputChange} />
+          
+          </div>
+        </Modal>
         <div className="row customer-background">
           <div className="col-sm-8">
             <div className="row text-center">
@@ -212,7 +249,7 @@ function CustomerPage() {
                 <hr></hr>
                 <p>Total Items: {order.totalItems}</p>
                 <p>Total: ${order.totalPrice.toFixed(2)}</p>
-                <button className="orderButton" onClick={placeOrder}>
+                <button className="orderButton" onClick={toggleAddressModal}>
                   Place Order
                 </button>
                 <p
