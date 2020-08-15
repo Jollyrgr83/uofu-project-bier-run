@@ -1,6 +1,9 @@
+// ORDER MODEL
+// dependencies
 const mongoose = require("mongoose");
+// define schema
 const Schema = mongoose.Schema;
-
+// create order schema
 const orderSchema = new Schema({
   orderDetails: { type: String, required: true },
   totalPrice: { type: Number, required: true },
@@ -13,7 +16,7 @@ const orderSchema = new Schema({
   deliveredDate: { type: Date },
   date: { type: Date, default: Date.now, required: true }
 });
-
+// configure schema as model
 const Order = mongoose.model("Order", orderSchema);
 
 module.exports = Order;

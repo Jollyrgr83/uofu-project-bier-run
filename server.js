@@ -1,24 +1,25 @@
+// SERVER
+// dependencies
 const express = require("express");
-
 const mongoose = require("mongoose");
-const routes = require("./routes");
+// set up express router
 const app = express();
+// bring in routes
+const routes = require("./routes");
+// establish port variable
 const PORT = process.env.PORT || 3001;
-
-// Define middleware here
+// middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Serve up static assets (usually on heroku)
+// static assets
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-// Add routes, both API and view
+// routes
 app.use(routes);
-
-// Connect to the Mongo DB
+// mongoDB connection
 mongoose.connect(process.env.MONGODB_URI || "mongodb://user:password1@ds361768.mlab.com:61768/heroku_s62dvl7k" || "mongodb://localhost/bierRunDB");
-
-// Start the API server
+// starts API server
 app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log(`API Server now listening on PORT ${PORT}`);
 });
