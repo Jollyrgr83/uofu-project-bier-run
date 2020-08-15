@@ -44,17 +44,5 @@ export default {
     return axios.post("/api/customer", orderObj).then((res) => {
       return res;
     });
-  },
-  // create user with Auth0
-  createUser: function(userObj) {
-    return axios({
-      method: "POST",
-      url: "https://dev-w193otkg.us.auth0.com/api/v2/users",
-      data: userObj,
-      headers: {
-        authorization: "Bearer ABCD", "content-type": "application/json"
-      },
-      json: true
-    })
   }
 };
