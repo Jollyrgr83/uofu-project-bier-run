@@ -58,13 +58,13 @@ function CustomerPage() {
   });
 
   useEffect(() => {
-    const doSomething = async () => {
-      console.log(isAuthenticated);
-    };
-    if (!loading) {
-      doSomething();
-      loadInventory();
-    }
+    // const doSomething = async () => {
+    //   console.log(isAuthenticated);
+    // };
+    // if (!loading) {
+    //   doSomething();
+    //   loadInventory();
+    // }
     loadInventory();
   }, []);
 
@@ -77,6 +77,7 @@ function CustomerPage() {
   }
 
   function loadInventory() {
+    console.log("isAuthenticated: ", isAuthenticated);
     API.getInventory().then((res) => {
       setInventory({
         images: [...API.images],
