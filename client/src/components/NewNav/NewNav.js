@@ -53,11 +53,6 @@ function NewNav() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/auth">
-                  Auth (testing)
-                </a>
-              </li>
-              <li className="nav-item">
                 <LoginLink />
               </li>
               <li className="nav-item">
