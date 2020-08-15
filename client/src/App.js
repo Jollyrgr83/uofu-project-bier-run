@@ -1,17 +1,20 @@
+// APP
+// react
 import React from 'react';
+// react router
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-import "./App.css";
+// pages
 import HomePage from "./pages/HomePage";
 import DriverPage from "./pages/DriverPage";
 import CustomerPage from "./pages/CustomerPage";
-import NewNav from "./components/NewNav/NewNav.js"
+// component
+import Nav from "./components/Nav"
 
 function App() {
   return (
     <Router>
       <div>
-        <NewNav />
+        <Nav />
         <Switch>
           <Route exact path={["/"]}>
             <HomePage />
@@ -21,12 +24,6 @@ function App() {
           </Route>
           <Route exact path={["/customer"]}>
             <CustomerPage />
-          </Route>
-          <Route exact path={["/features"]}>
-            <HomePage />
-          </Route>
-          <Route exact path={["/pricing"]}>
-            <HomePage />
           </Route>
         </Switch>
       </div>

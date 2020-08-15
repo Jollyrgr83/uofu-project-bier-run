@@ -1,12 +1,14 @@
+// HOMEPAGE
+// react
 import React, { useState } from "react";
 // authentication
 import { useAuth0 } from "@auth0/auth0-react";
 // stylesheet
-import "../HomePage/HomePage.css";
+import "./HomePage.css";
 // logo image
 import logo from "../../assets/images/BierRunLogoNoBG.svg";
 // page components
-import LoginButton from "../../components/LoginButton";
+import LoginButton from "../../components/Buttons/LoginButton";
 
 function HomePage() {
   return (

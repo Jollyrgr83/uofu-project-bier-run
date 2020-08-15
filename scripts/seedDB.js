@@ -133,6 +133,21 @@ const inventorySeed = [
     beerName: "Corona",
     quantity: "24-pack Bottles",
     price: "25.98"
+  },
+  {
+    beerName: "Blue Moon",
+    quantity: "15-pack Cans",
+    price: "14.48"
+  },
+  {
+    beerName: "Blue Moon",
+    quantity: "6-pack Bottles",
+    price: "8.48"
+  },
+  {
+    beerName: "Blue Moon",
+    quantity: "12-pack Bottles",
+    price: "14.48"
   }
 ];
 
