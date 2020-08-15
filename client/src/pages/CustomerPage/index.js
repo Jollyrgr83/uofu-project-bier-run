@@ -50,6 +50,12 @@ function CustomerPage() {
     isShow: false,
   });
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [addressInfo, setAddressInfo] = useState({
+    street: "",
+    city: "",
+    state: "",
+    zip: ""
+  });
 
   useEffect(() => {
     loadInventory();
@@ -69,6 +75,14 @@ function CustomerPage() {
         images: [...API.images],
         beers: res,
       });
+    });
+  }
+
+  function handleInputChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    setAddressInfo({
+      [name]: value
     });
   }
 
@@ -189,7 +203,18 @@ function CustomerPage() {
           contentLabel="Enter Address Screen"
           style={customStyles}
         >
-          <div>Address Modal</div>
+          <div>
+            <div className="address-modal-title">Enter Your Address:</div>
+            <div className="address-modal-label">Street Address:</div>
+            <input className="address-modal-input" name="street" type="text" onChange={handleInputChange} />
+            <div className="address-modal-label">City:</div>
+            <input className="address-modal-input" name="city" type="text" onChange={handleInputChange} />
+            <div className="address-modal-label">State:</div>
+            <input className="address-modal-input" name="state" type="text" onChange={handleInputChange} />
+            <div className="address-modal-label">Zip Code:</div>
+            <input className="address-modal-input" name="zip" type="text" onChange={handleInputChange} />
+          
+          </div>
         </Modal>
         <div className="row customer-background">
           <div className="col-sm-8">

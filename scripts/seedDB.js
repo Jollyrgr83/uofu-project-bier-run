@@ -6,143 +6,133 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/bierRunDB");
 const inventorySeed = [
   {
     beerName: "Budweiser",
-    quantity: "6-pack Cans",
-    price: "6.99"
-  },
-  {
-    beerName: "Budweiser",
     quantity: "12-pack Cans",
-    price: "12.99"
+    price: "10.98"
   },
   {
     beerName: "Budweiser",
     quantity: "6-pack Bottles",
-    price: "7.99"
+    price: "6.98"
   },
   {
     beerName: "Budweiser",
     quantity: "12-pack Bottles",
-    price: "13.99"
-  },
-  {
-    beerName: "Bud Light",
-    quantity: "6-pack Cans",
-    price: "6.99"
+    price: "10.48"
   },
   {
     beerName: "Bud Light",
     quantity: "12-pack Cans",
-    price: "12.99"
+    price: "10.48"
   },
   {
     beerName: "Bud Light",
-    quantity: "6-pack Bottles",
-    price: "7.99"
+    quantity: "30-pack Cans",
+    price: "20.73"
   },
   {
     beerName: "Bud Light",
     quantity: "12-pack Bottles",
-    price: "13.99"
+    price: "10.48"
   },
   {
-    beerName: "Coors Light",
-    quantity: "6-pack Cans",
-    price: "6.99"
+    beerName: "Bud Light",
+    quantity: "24-pack Bottles",
+    price: "18.98"
   },
   {
     beerName: "Coors Light",
     quantity: "12-pack Cans",
-    price: "12.99"
+    price: "10.48"
+  },
+  {
+    beerName: "Coors Light",
+    quantity: "30-pack Cans",
+    price: "20.98"
   },
   {
     beerName: "Coors Light",
     quantity: "6-pack Bottles",
-    price: "7.99"
+    price: "5.98"
   },
   {
     beerName: "Coors Light",
     quantity: "12-pack Bottles",
-    price: "13.99"
-  },
-  {
-    beerName: "Miller Lite",
-    quantity: "6-pack Cans",
-    price: "6.99"
+    price: "10.48"
   },
   {
     beerName: "Miller Lite",
     quantity: "12-pack Cans",
-    price: "12.99"
+    price: "11.48"
+  },
+  {
+    beerName: "Miller Lite",
+    quantity: "30-pack Cans",
+    price: "20.98"
   },
   {
     beerName: "Miller Lite",
     quantity: "6-pack Bottles",
-    price: "7.99"
+    price: "6.98"
   },
   {
     beerName: "Miller Lite",
     quantity: "12-pack Bottles",
-    price: "13.99"
-  },
-  {
-    beerName: "Michelob Ultra",
-    quantity: "6-pack Cans",
-    price: "6.99"
+    price: "10.48"
   },
   {
     beerName: "Michelob Ultra",
     quantity: "12-pack Cans",
-    price: "12.99"
+    price: "12.98"
   },
   {
     beerName: "Michelob Ultra",
-    quantity: "6-pack Bottles",
-    price: "7.99"
+    quantity: "24-pack Cans",
+    price: "20.98"
   },
   {
     beerName: "Michelob Ultra",
     quantity: "12-pack Bottles",
-    price: "13.99"
+    price: "12.98"
   },
   {
-    beerName: "Heineken",
-    quantity: "6-pack Cans",
-    price: "6.99"
+    beerName: "Michelob Ultra",
+    quantity: "18-pack Bottles",
+    price: "17.98"
   },
   {
     beerName: "Heineken",
     quantity: "12-pack Cans",
-    price: "12.99"
+    price: "14.48"
   },
   {
     beerName: "Heineken",
     quantity: "6-pack Bottles",
-    price: "7.99"
+    price: "9.48"
   },
   {
     beerName: "Heineken",
     quantity: "12-pack Bottles",
-    price: "13.99"
-  },
-  {
-    beerName: "Corona",
-    quantity: "6-pack Cans",
-    price: "6.99"
+    price: "14.27"
   },
   {
     beerName: "Corona",
     quantity: "12-pack Cans",
-    price: "12.99"
+    price: "14.48"
   },
   {
     beerName: "Corona",
     quantity: "6-pack Bottles",
-    price: "7.99"
+    price: "8.98"
   },
   {
     beerName: "Corona",
     quantity: "12-pack Bottles",
-    price: "13.99"
+    price: "14.48"
+  },
+  {
+    beerName: "Corona",
+    quantity: "24-pack Bottles",
+    price: "25.98"
   }
 ];
 
