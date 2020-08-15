@@ -11,6 +11,8 @@ import LoginButton from "../../components/LoginButton";
 function HomePage() {
   return (
     <main>
+      <div>isAuthenticated: {isAuthenticated}</div>
+      <div>User: {user}</div>
       <div className="topnav">
         <div className="topnav-centered">
           <a href="#home" className="active">
