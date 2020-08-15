@@ -24,7 +24,7 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function CustomerPage() {
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, loading } = useAuth0();
   const [inventory, setInventory] = useState({ images: [], beers: {} });
   const [isOpen, setIsOpen] = useState(false);
   const [modalState, setModalState] = useState({
@@ -58,6 +58,13 @@ function CustomerPage() {
   });
 
   useEffect(() => {
+    const doSomething = async () => {
+      console.log(isAuthenticated);
+    };
+    if (!loading) {
+      doSomething();
+      loadInventory();
+    }
     loadInventory();
   }, []);
 
