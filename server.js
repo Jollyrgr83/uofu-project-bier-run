@@ -8,6 +8,9 @@ const app = express();
 const routes = require("./routes");
 // establish port variable
 const PORT = process.env.PORT || 3001;
+// mongoDB connection credentials
+const remoteURL = "mongodb://user:password1@ds361768.mlab.com:61768/heroku_s62dvl7k";
+const localURL = "mongodb://localhost/bierRunDB";
 // middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -18,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
 // routes
 app.use(routes);
 // mongoDB connection
-mongoose.connect(process.env.MONGODB_URI || "mongodb://user:password1@ds361768.mlab.com:61768/heroku_s62dvl7k" || "mongodb://localhost/bierRunDB");
+mongoose.connect(process.env.MONGODB_URI || remoteURL);
 // starts API server
 app.listen(PORT, function() {
   console.log(`API Server now listening on PORT ${PORT}`);
