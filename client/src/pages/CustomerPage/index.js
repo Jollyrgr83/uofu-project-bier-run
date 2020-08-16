@@ -27,7 +27,7 @@ Modal.setAppElement("#root");
 
 function CustomerPage() {
   // authentication
-  const { user, isAuthenticated, loading } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
   // inventory elements (logos, names, and quantity options)
   const [inventory, setInventory] = useState({ images: [], beers: {} });
   // beer selection modal open state
@@ -167,165 +167,171 @@ function CustomerPage() {
     toggleAddressModal();
   }
   // page render
-  return (
-    // protected route - only renders after successful login
-    isAuthenticated && (
-      <div className="main-container">
-        <div className="row message-container">
-          <div className="col-sm-8">
-            <p className="welcome">
-              Welcome {user.name}!
-              <br />
-              Your delivery address is:
-              <br />
-              {addressInfo.display}
-            </p>
-          </div>
-          <div className="col-sm-4">
-            <p className="welcome">
-              {orderMessage.display}
-            </p>
-          </div>
-        </div>
-        <Modal
-          isOpen={isOpen}
-          onRequestClose={toggleModal}
-          contentLabel="Inventory Order Screen"
-          style={customStyles}
-        >
-          <form id="modalForm" className="text-center mx-auto">
-            <div className="modal-title mx-auto">{modalState.modalName}</div>
-            {modalState.modalInventory.map((x) => {
-              return (
-                <div className="row modal-row mx-auto" key={x.id}>
-                  <p className="modal-item mx-auto">{x.quantity}</p>
-                  <p className="modal-item mx-auto">${x.price}</p>
-                  <input
-                    name={`${modalState.modalName},${x.quantity},${x.price}`}
-                    type="number"
-                    className="modal-item mx-auto"
-                  />
-                </div>
-              );
-            })}
-            <div className="row modal-footer">
-              <button className="modalButton cancel" onClick={toggleModal}>
-                Cancel
-              </button>
-              <button
-                type="submit"
-                onClick={handleModalFormSubmit}
-                className="modalButton addToCart"
-              >
-                Add to Cart
-              </button>
+  if (isLoading) {
+    return (
+      <h1>Please wait... loading page</h1>
+    );
+  } else {
+    return (
+      // protected route - only renders after successful login
+      isAuthenticated && (
+        <div className="main-container">
+          <div className="row message-container">
+            <div className="col-sm-8">
+              <p className="welcome">
+                Welcome {user.name}!
+                <br />
+                Your delivery address is:
+                <br />
+                {addressInfo.display}
+              </p>
             </div>
-          </form>
-        </Modal>
-        <Modal
-          isOpen={isAddressModalOpen}
-          onRequestClose={toggleAddressModal}
-          contentLabel="Enter Address Screen"
-          style={customStyles}
-        >
-          <div>
-            <div className="address-modal-title mx-auto">Enter Delivery Address:</div>
-            <div className="text-center">
-              <div className="address-modal-label mx-auto">Street Address:</div>
-              <input
-                className="address-modal-input mx-auto"
-                name="street"
-                type="text"
-                id="street"
-              />
-            </div>
-            <div className="text-center">
-              <div className="address-modal-label mx-auto">City:</div>
-              <input
-                className="address-modal-input mx-auto"
-                name="city"
-                type="text"
-                id="city"
-              />
-            </div>
-            <div className="text-center">
-              <div className="address-modal-label mx-auto">State:</div>
-              <input
-                className="address-modal-input mx-auto"
-                name="state"
-                type="text"
-                id="state"
-              />
-            </div>
-            <div className="text-center">
-              <div className="address-modal-label mx-auto">Zip Code:</div>
-              <input
-                className="address-modal-input mx-auto"
-                name="zip"
-                type="text"
-                id="zip"
-              />
-            </div>
-            <div className="text-center mx-auto">
-              <button className="modalButton blue mx-auto" onClick={placeOrder}>Submit</button>
+            <div className="col-sm-4">
+              <p className="welcome">
+                {orderMessage.display}
+              </p>
             </div>
           </div>
-        </Modal>
-        <div className="row customer-background">
-          <div className="col-sm-8">
-            <div className="row text-center">
-              {inventory.images.map((x) => {
+          <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="Inventory Order Screen"
+            style={customStyles}
+          >
+            <form id="modalForm" className="text-center mx-auto">
+              <div className="modal-title mx-auto">{modalState.modalName}</div>
+              {modalState.modalInventory.map((x) => {
                 return (
-                  <img
-                    key={x.id}
-                    src={x.logo}
-                    alt={x.name}
-                    className="inventory-card mx-auto"
-                    onClick={toggleModal}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="col-sm-4 mx-auto">
-            <div className="shopping-cart">
-              <div className="cart-title">
-                <span className="text-your">YOUR</span>
-                <span className="text-cart">CART</span>
-              </div>
-              {order.order.map((x) => {
-                return (
-                  <div key={x.id}>
-                    <hr></hr>
-                    <p className="cart-sub">Item: {x.name}</p>
-                    <p className="cart-sub">Quantity: {x.quantity}</p>
-                    <p className="cart-sub">Subtotal: ${x.subtotal}</p>
+                  <div className="row modal-row mx-auto" key={x.id}>
+                    <p className="modal-item mx-auto">{x.quantity}</p>
+                    <p className="modal-item mx-auto">${x.price}</p>
+                    <input
+                      name={`${modalState.modalName},${x.quantity},${x.price}`}
+                      type="number"
+                      className="modal-item mx-auto"
+                    />
                   </div>
                 );
               })}
-              <div className="cart-total">
-                <hr></hr>
-                <p>Total Items: {order.totalItems}</p>
-                <p>Total: ${order.totalPrice.toFixed(2)}</p>
-                <button className="orderButton mx-auto" onClick={toggleAddressModal}>
-                  Place Order
+              <div className="row modal-footer">
+                <button className="modalButton cancel" onClick={toggleModal}>
+                  Cancel
                 </button>
-                <p
-                  className={
-                    placeOrderMessage.isShow
-                      ? "placeOrderMessage show"
-                      : "placeOrderMessage hide"
-                  }
+                <button
+                  type="submit"
+                  onClick={handleModalFormSubmit}
+                  className="modalButton addToCart"
                 >
-                  {placeOrderMessage.text}
-                </p>
+                  Add to Cart
+                </button>
+              </div>
+            </form>
+          </Modal>
+          <Modal
+            isOpen={isAddressModalOpen}
+            onRequestClose={toggleAddressModal}
+            contentLabel="Enter Address Screen"
+            style={customStyles}
+          >
+            <div>
+              <div className="address-modal-title mx-auto">Enter Delivery Address:</div>
+              <div className="text-center">
+                <div className="address-modal-label mx-auto">Street Address:</div>
+                <input
+                  className="address-modal-input mx-auto"
+                  name="street"
+                  type="text"
+                  id="street"
+                />
+              </div>
+              <div className="text-center">
+                <div className="address-modal-label mx-auto">City:</div>
+                <input
+                  className="address-modal-input mx-auto"
+                  name="city"
+                  type="text"
+                  id="city"
+                />
+              </div>
+              <div className="text-center">
+                <div className="address-modal-label mx-auto">State:</div>
+                <input
+                  className="address-modal-input mx-auto"
+                  name="state"
+                  type="text"
+                  id="state"
+                />
+              </div>
+              <div className="text-center">
+                <div className="address-modal-label mx-auto">Zip Code:</div>
+                <input
+                  className="address-modal-input mx-auto"
+                  name="zip"
+                  type="text"
+                  id="zip"
+                />
+              </div>
+              <div className="text-center mx-auto">
+                <button className="modalButton blue mx-auto" onClick={placeOrder}>Submit</button>
+              </div>
+            </div>
+          </Modal>
+          <div className="row customer-background">
+            <div className="col-sm-8">
+              <div className="row text-center">
+                {inventory.images.map((x) => {
+                  return (
+                    <img
+                      key={x.id}
+                      src={x.logo}
+                      alt={x.name}
+                      className="inventory-card mx-auto"
+                      onClick={toggleModal}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div className="col-sm-4 mx-auto">
+              <div className="shopping-cart">
+                <div className="cart-title">
+                  <span className="text-your">YOUR</span>
+                  <span className="text-cart">CART</span>
+                </div>
+                {order.order.map((x) => {
+                  return (
+                    <div key={x.id}>
+                      <hr></hr>
+                      <p className="cart-sub">Item: {x.name}</p>
+                      <p className="cart-sub">Quantity: {x.quantity}</p>
+                      <p className="cart-sub">Subtotal: ${x.subtotal}</p>
+                    </div>
+                  );
+                })}
+                <div className="cart-total">
+                  <hr></hr>
+                  <p>Total Items: {order.totalItems}</p>
+                  <p>Total: ${order.totalPrice.toFixed(2)}</p>
+                  <button className="orderButton mx-auto" onClick={toggleAddressModal}>
+                    Place Order
+                  </button>
+                  <p
+                    className={
+                      placeOrderMessage.isShow
+                        ? "placeOrderMessage show"
+                        : "placeOrderMessage hide"
+                    }
+                  >
+                    {placeOrderMessage.text}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    )
-  );
+      )
+    );
+  }
 }
 
 export default CustomerPage;

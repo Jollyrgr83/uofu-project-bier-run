@@ -38,7 +38,7 @@ p {
   outline: none;
   border: none;
   border-radius: 40px;
-  margin: 25px;
+  margin: 50px 25px 100px 25px;
   padding: 25px;
   width: 75vw;
   max-width: 600px;
