@@ -3,12 +3,10 @@
 .main-container {
   margin: 0 10px 0 10px;
 }
-
 /* message elements (top row) */
 .message-container {
   background-color: rgb(230, 230, 230);
 }
-
 .welcome {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
@@ -19,7 +17,6 @@
   padding: 10px;
   text-align: left;
 }
-
 /* inventory elements */
 .inventory-card {
   width: 300px;
@@ -30,13 +27,12 @@
   background-color: white;
   margin: 15px;
 }
-
 .customer-background {
   background-color: rgb(230, 230, 230);
 }
-
 /* shopping cart elements */
 .shopping-cart {
+  font-family: "Saira Stencil One", cursive;
   background-color: white;
   border: solid 1px black;
   box-shadow: 3px 3px 6px black;
@@ -44,22 +40,34 @@
   margin: 15px;
   padding: 25px;
 }
-
 .cart-title {
+  font-family: "Saira Stencil One", cursive;
+  font-size: 36px;
+  margin: 10px;
   width: 100%;
   text-align: center;
 }
-
+.text-your {
+  border: solid 4px black;
+  background-color: rgb(255, 192, 0);
+  color: black;
+  padding: 5px;
+}
+.text-cart {
+  border: solid 4px black;
+  background-color: black;
+  color: rgb(255, 192, 0);
+  padding: 5px;
+  margin-right: 25px;
+}
 .cart-sub {
   width: 100%;
   text-align: left;
 }
-
 .cart-total {
   width: 100%;
   text-align: end;
 }
-
 /* modal elements */
 .modal-title {
   font-family: "Montserrat", sans-serif;
@@ -68,7 +76,6 @@
   width: 90%;
   margin: 0 0 25px 0;
 }
-
 .modal-row {
   font-family: "Montserrat", sans-serif;
   text-align: left;
@@ -76,13 +83,11 @@
   width: 90%;
   max-width: 600px;
 }
-
 .modal-item {
   width: 125px;
   margin: 25px;
   text-align: center;
 }
-
 /* buttons */
 .modalButton {
   outline: none;
@@ -93,8 +98,8 @@
   width: 200px;
   color: white;
 }
-
 .orderButton {
+  font-family: "Montserrat", sans-serif;
   outline: none;
   border: none;
   border-radius: 5px;
@@ -104,38 +109,30 @@
   background-color: blue;
   color: white;
 }
-
 .modalButton:active, .modalButton:enabled, .orderButton:active, .orderButton:enabled {
   outline: none;
 }
-
 .modalButton:hover, .orderButton:hover {
   outline: none;
   opacity: 0.7;
 }
-
 .cancel {
   background-color: red;
 }
-
 .addToCart {
   background-color: blue;
 }
-
 /* success message after placing order */
 .placeOrderMessage {
   margin: 10px;
   text-align: center;
 }
-
 .show {
   display: block;
 }
-
 .hide {
   display: none;
 }
-
 /* address modal elements */
 .address-modal-title {
   width: 90%;
@@ -144,20 +141,17 @@
   margin: 10px;
   text-align: center;
 }
-
 .address-modal-label {
   width: 90%;
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   text-align: left;
 }
-
 .address-modal-input {
   width: 90%;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
 }
-
 .address-modal-button {
   width: 90%;
   margin: 25px;

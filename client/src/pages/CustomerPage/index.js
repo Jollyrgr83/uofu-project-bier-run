@@ -83,10 +83,6 @@ function CustomerPage() {
     loadInventory();
   }, []);
 
-  function loadUserWelcome() {
-    API.getUserData().then((res) => {});
-  }
-
   function loadUserOrderMessage() {
     API.getUserOrderData().then((res) => {});
   }
@@ -178,7 +174,11 @@ function CustomerPage() {
         <div className="row message-container">
           <div className="col-sm-8">
             <p className="welcome">
-              Welcome {user.name}, your address is: {addressInfo.display}
+              Welcome {user.name}!
+              <br />
+              Your delivery address is:
+              <br />
+              {addressInfo.display}
             </p>
           </div>
           <div className="col-sm-4">
@@ -289,14 +289,17 @@ function CustomerPage() {
           </div>
           <div className="col-sm-4 mx-auto">
             <div className="shopping-cart">
-              <p className="cart-title">Shopping Cart</p>
+              <div className="cart-title">
+                <span className="text-your">YOUR</span>
+                <span className="text-cart">CART</span>
+              </div>
               {order.order.map((x) => {
                 return (
                   <div key={x.id}>
                     <hr></hr>
-                    <p className="cart-sub">Item: {`${x.name}`}</p>
+                    <p className="cart-sub">Item: {x.name}</p>
                     <p className="cart-sub">Quantity: {x.quantity}</p>
-                    <p className="cart-sub">Subtotal: {x.subtotal}</p>
+                    <p className="cart-sub">Subtotal: ${x.subtotal}</p>
                   </div>
                 );
               })}
@@ -304,7 +307,7 @@ function CustomerPage() {
                 <hr></hr>
                 <p>Total Items: {order.totalItems}</p>
                 <p>Total: ${order.totalPrice.toFixed(2)}</p>
-                <button className="orderButton" onClick={toggleAddressModal}>
+                <button className="orderButton mx-auto" onClick={toggleAddressModal}>
                   Place Order
                 </button>
                 <p
