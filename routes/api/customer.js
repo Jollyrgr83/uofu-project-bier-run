@@ -12,4 +12,9 @@ router.route("/")
   // POST: receives new customer orders from CUSTOMERPAGE
   .post(orderController.newOrder);
 
+router.route("/active/:customerID")
+  // GET: retrieves and sends active orders for CUSTOMERPAGE
+  .get(orderController.findOrdersByCustomer);
+
+
 module.exports = router;

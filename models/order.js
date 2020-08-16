@@ -9,6 +9,7 @@ const orderSchema = new Schema({
   totalPrice: { type: Number, required: true },
   totalItems: { type: Number, required: true },
   customerID: { type: String, required: true },
+  address: { type: String, required: true },
   inProgress: { type: Boolean, default: false, required: true },
   driverID: { type: String },
   estimatedTime: { type: Number },

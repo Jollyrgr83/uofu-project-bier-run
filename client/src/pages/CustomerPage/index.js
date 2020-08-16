@@ -43,16 +43,8 @@ function CustomerPage() {
     totalItems: 0,
     totalPrice: 0,
   });
-  // user info for welcome message in top row
-  const [welcomeMessage, setWelcomeMessage] = useState({
-    username: "",
-    address: "",
-  });
   // order info for order status message in top row
   const [orderMessage, setOrderMessage] = useState({
-    text: "",
-    orderID: "",
-    arrivalTime: "",
     display: "You have no active orders."
   });
   // order info for shopping cart message after submitting order
@@ -72,19 +64,22 @@ function CustomerPage() {
   });
   // useEffect to load beer inventory from API on page load
   useEffect(() => {
-    // TROUBLESHOOTING PAGE LOAD AND LOGIN ISSUES HERE******
-    // const doSomething = async () => {
-    //   console.log(isAuthenticated);
-    // };
-    // if (!loading) {
-    //   doSomething();
-    //   loadInventory();
-    // }
     loadInventory();
   }, []);
 
   function loadUserOrderMessage() {
-    API.getUserOrderData().then((res) => {});
+    API.getUserOrderData(user.email).then((res) => {
+      console.log("getUserOrder res", res);
+      if (!res.data[0]) {
+        setOrderMessage({ display: "You have no active orders." });
+      } else {
+        if (res.data[0].inProgress === false) {
+          setOrderMessage({ display: `Your order ${res.data[0]._id} is waiting on a driver.`});
+        } else {
+          setOrderMessage({ display: `Your order ${res.data[0]._id} should arrive in less than ${res.data[0].estimatedTime} minutes.`});    
+        }
+      }
+    });
   }
 
   function loadInventory() {
@@ -172,6 +167,7 @@ function CustomerPage() {
       <h1>Please wait... loading page</h1>
     );
   } else {
+    loadUserOrderMessage();
     return (
       // protected route - only renders after successful login
       isAuthenticated && (
@@ -293,11 +289,11 @@ function CustomerPage() {
               </div>
             </div>
             <div className="col-sm-4 mx-auto">
+              <div className="cart-title mx-auto">
+                <span className="text-your mx-auto">YOUR</span>
+                <span className="text-cart mx-auto">CART</span>
+              </div>
               <div className="shopping-cart">
-                <div className="cart-title">
-                  <span className="text-your">YOUR</span>
-                  <span className="text-cart">CART</span>
-                </div>
                 {order.order.map((x) => {
                   return (
                     <div key={x.id}>

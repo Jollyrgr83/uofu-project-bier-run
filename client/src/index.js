@@ -12,7 +12,7 @@ import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "@auth0/auth0-react";
 // urls for local development/testing and heroku deployment
 const localURL = "http://localhost:3000/customer";
-const herokuURL = "https://bier-run.herokuapp.com/customer";
+// const herokuURL = "https://bier-run.herokuapp.com/customer";
 
 ReactDOM.render(
   <Auth0Provider
