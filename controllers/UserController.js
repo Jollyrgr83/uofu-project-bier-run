@@ -1,6 +1,9 @@
+// USER CONTROLLER
+// bring in models
 const db = require("../models");
 
 module.exports = {
+  // sends user info by userID
   findUserByID: function(req, res) {
     db.User
       .find({

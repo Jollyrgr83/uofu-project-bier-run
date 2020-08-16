@@ -1,8 +1,11 @@
+// DATABASE SEED
+// dependencies
 const mongoose = require("mongoose");
+// bring in models
 const db = require("../models");
-
+// establish mongoDB connection
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/bierRunDB");
-
+// beer selection inventory seed
 const inventorySeed = [
   {
     beerName: "Budweiser",
@@ -150,7 +153,7 @@ const inventorySeed = [
     price: "14.48"
   }
 ];
-
+// remove existing Inventory collection entries and add seed items
 db.Inventory.remove({})
   .then(() => db.Inventory.collection.insertMany(inventorySeed))
   .then(data => {
