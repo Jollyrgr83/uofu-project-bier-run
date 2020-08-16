@@ -18,7 +18,7 @@ ReactDOM.render(
   <Auth0Provider
     domain="dev-w193otkg.us.auth0.com"
     clientId="XtMtHNFaHul68C8mV9F2ozyrdaCOpw7x"
-    redirectUri={herokuURL}
+    redirectUri={localURL}
     audience="https://dev-w193otkg.us.auth0.com/api/v2/"
     scope="read:current_user update:current_user_metadata"
   >
