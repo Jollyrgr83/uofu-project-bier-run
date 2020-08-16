@@ -51,6 +51,15 @@
 .order-button-container {
   margin: 10px;
 }
+.order-link {
+  color: blue;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+.order-link:hover {
+  cursor: pointer;
+  text-decoration-line: underline;
+}
 /* button style */
 .driver-button {
   outline: none;
