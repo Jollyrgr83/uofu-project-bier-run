@@ -1,8 +1,15 @@
+/* NAV COMPONENT STYLESHEET */
+/* main nav styling and font */
 .navbar {
     background-color: rgb(255, 192, 0) !important;
     padding: 1rem 1rem !important;
 }
 
+.local-nav-font {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+/* login button */
 .login-button {
     outline: none;
     border: none;
@@ -22,28 +29,24 @@
     opacity: .7;
     background-color: rgb(75, 0, 0)!important;
 }
-
+/* text logo container */
 .text-logo {
   font-family: "Saira Stencil One", cursive;
   font-size: 42px;
   margin: 10px;
 }
-
+/* text logo - BIER section */
 .text-bier {
   border: solid 4px black;
   background-color: rgb(255, 192, 0);
   color: black;
   padding: 5px;
 }
-
+/* text logo - RUN section */
 .text-run {
   border: solid 4px black;
   background-color: black;
   color: rgb(255, 192, 0);
   padding: 5px;
   margin-right: 25px;
-}
-
-.local-nav-font {
-  font-family: "Montserrat", sans-serif !important;
 }
