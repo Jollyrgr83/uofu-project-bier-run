@@ -55,9 +55,11 @@ const dummyState = false;
 
 function DriverPage() {
   // authentication
-  const { user, isAuthenticated } = useAuth0(); 
-  // user info for welcome message in top row
-  const [welcomeMessage, setWelcomeMessage] = useState();
+  const { user, isAuthenticated, isLoading } = useAuth0(); 
+  // number of selected deliveries for message in top row
+  const [selectedDeliveries, setSelectedDeliveries] = useState({
+    count: 0
+  });
   // ETA modal open state
   const [isOpen, setIsOpen] = useState(false);
   // stores users delivery state (active/inactive)
@@ -83,12 +85,11 @@ function DriverPage() {
       rawOrders: [...dummyOrders],
       sortedOrders: [...sortedArray],
     });
-    loadUserData();
+    loadSelectedOrders();
   }
   // loads user info from API call and updates welcome message in top row
-  function loadUserData() {
+  function loadSelectedOrders() {
     // get user info from login and database
-    // use setWelcomeMessage to set { username: username, status: status, numberOfActiveOrders: numberOfActiveOrders }
     setDeliveryState(dummyState);
   }
   // handles ETA modal open/close
@@ -119,171 +120,182 @@ function DriverPage() {
   // updates drivers delivery status to API
   function updateDriverStatus() {
     // use API to update driver status
-    // trigger loadUserData to refresh user data
+    // trigger loadSelectedOrders to refresh user data
     setDeliveryState(!deliveryState);
   }
+
+  console.log("isAuthenticated", isAuthenticated);
+  console.log("user", user);
+
   // page render
-  return (
-    // protected route - only renders after successful login
-    isAuthenticated && (
-      <div className="driver-main-container">
-        <div className="row welcome-container mx-auto">
-          <div className="col-sm-8">
-            <div className="mx-auto">
-              Welcome [username],
-              <br />
-              You have [#] active deliveries.
-              <br />
-              Your current status is:
-              <span
-                className={
-                  deliveryState
-                    ? "status active mx-auto"
-                    : "status inactive mx-auto"
-                }
-              >
-                {deliveryState ? " Active" : " Inactive"}
-              </span>
+  if (isLoading) {
+    return (
+      <h1>Please wait... loading page</h1>
+    );
+  } else {
+    return (
+      // protected route - only renders after successful login
+      // isAuthenticated && 
+      (
+        <div className="driver-main-container">
+          <div className="row welcome-container mx-auto">
+            <div className="col-sm-8">
+              <div className="mx-auto">
+                Welcome {user.name},
+                <br />
+                You have selected {selectedDeliveries.count} deliveries.
+                <br />
+                Your current status is:
+                <span
+                  className={
+                    deliveryState
+                      ? "status active mx-auto"
+                      : "status inactive mx-auto"
+                  }
+                >
+                  {deliveryState ? " Active" : " Inactive"}
+                </span>
+              </div>
+            </div>
+            <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
+              {deliveryState ? (
+                <button
+                  onClick={updateDriverStatus}
+                  className="driver-button red mx-auto my-auto"
+                >
+                  Stop Delivering
+                </button>
+              ) : (
+                <button
+                  onClick={updateDriverStatus}
+                  className="driver-button green mx-auto my-auto"
+                >
+                  Start Delivering
+                </button>
+              )}
             </div>
           </div>
-          <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
-            {deliveryState ? (
-              <button
-                onClick={updateDriverStatus}
-                className="driver-button red mx-auto my-auto"
-              >
-                Stop Delivering
-              </button>
-            ) : (
-              <button
-                onClick={updateDriverStatus}
-                className="driver-button green mx-auto my-auto"
-              >
-                Start Delivering
-              </button>
-            )}
-          </div>
+          {orders.sortedOrders.map((x) => {
+            if (x.inProgress === true) {
+              return (
+                <div className="row order-card-selected mx-auto" key={x.id}>
+                  <div className="col-sm-8">
+                    <div className="row">
+                      <div className="col-sm-4 order-item">
+                        Order ID:
+                        <br />
+                        {x.id}
+                      </div>
+                      <div className="col-sm-4 order-item">
+                        Price:
+                        <br />${x.totalPrice}
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-4 order-item">
+                        Order Details:
+                        <br />
+                        <a href="">{x.id}</a>
+                      </div>
+                      <div className="col-sm-4 order-item">
+                        Address:
+                        <br />
+                        {x.address}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
+                    <button
+                      onClick={unselectOrder}
+                      className="driver-button red mx-auto"
+                    >
+                      Unselect
+                    </button>
+                    <button
+                      onClick={toggleModal}
+                      className="driver-button blue mx-auto"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={deliverOrder}
+                      className="driver-button green mx-auto"
+                    >
+                      Delivered
+                    </button>
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <div className="row order-card mx-auto" key={x.id}>
+                  <div className="col-sm-8">
+                    <div className="row">
+                      <div className="col-sm-4 order-item">
+                        Order ID:
+                        <br />
+                        {x.id}
+                      </div>
+                      <div className="col-sm-4 order-item">
+                        Price:
+                        <br />${x.totalPrice}
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-4 order-item">
+                        Order Details:
+                        <br />
+                        <a href="">{x.id}</a>
+                      </div>
+                      <div className="col-sm-4 order-item">
+                        Address:
+                        <br />
+                        {x.address}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
+                    <button
+                      onClick={selectOrder}
+                      className="driver-button blue mx-auto"
+                    >
+                      Select
+                    </button>
+                  </div>
+                </div>
+              );
+            }
+          })}
+          <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="Estimated Delivery Time"
+            style={customStyles}
+          >
+            <div className="mx-auto my-auto">
+              <div className="modal-title-driver mx-auto">
+                Enter an estimated delivery time (in minutes):
+              </div>
+              <div className="text-center mx-auto">
+                <input
+                  type="number"
+                  name="deliveryTime"
+                  className="modal-input mx-auto"
+                />
+                <button
+                  type="submit"
+                  onClick={updateDeliveryTime}
+                  className="driver-button blue modal-button mx-auto"
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          </Modal>
         </div>
-        {orders.sortedOrders.map((x) => {
-          if (x.inProgress === true) {
-            return (
-              <div className="row order-card-selected mx-auto" key={x.id}>
-                <div className="col-sm-8">
-                  <div className="row">
-                    <div className="col-sm-4 order-item">
-                      Order ID:
-                      <br />
-                      {x.id}
-                    </div>
-                    <div className="col-sm-4 order-item">
-                      Price:
-                      <br />${x.totalPrice}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-4 order-item">
-                      Order Details:
-                      <br />
-                      <a href="">{x.id}</a>
-                    </div>
-                    <div className="col-sm-4 order-item">
-                      Address:
-                      <br />
-                      {x.address}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
-                  <button
-                    onClick={unselectOrder}
-                    className="driver-button red mx-auto"
-                  >
-                    Unselect
-                  </button>
-                  <button
-                    onClick={toggleModal}
-                    className="driver-button blue mx-auto"
-                  >
-                    Update
-                  </button>
-                  <button
-                    onClick={deliverOrder}
-                    className="driver-button green mx-auto"
-                  >
-                    Delivered
-                  </button>
-                </div>
-              </div>
-            );
-          } else {
-            return (
-              <div className="row order-card mx-auto" key={x.id}>
-                <div className="col-sm-8">
-                  <div className="row">
-                    <div className="col-sm-4 order-item">
-                      Order ID:
-                      <br />
-                      {x.id}
-                    </div>
-                    <div className="col-sm-4 order-item">
-                      Price:
-                      <br />${x.totalPrice}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-4 order-item">
-                      Order Details:
-                      <br />
-                      <a href="">{x.id}</a>
-                    </div>
-                    <div className="col-sm-4 order-item">
-                      Address:
-                      <br />
-                      {x.address}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-3 text-center mx-auto my-auto order-button-container">
-                  <button
-                    onClick={selectOrder}
-                    className="driver-button blue mx-auto"
-                  >
-                    Select
-                  </button>
-                </div>
-              </div>
-            );
-          }
-        })}
-        <Modal
-          isOpen={isOpen}
-          onRequestClose={toggleModal}
-          contentLabel="Estimated Delivery Time"
-          style={customStyles}
-        >
-          <div className="mx-auto my-auto">
-            <div className="modal-title-driver mx-auto">
-              Enter an estimated delivery time (in minutes):
-            </div>
-            <div className="text-center mx-auto">
-              <input
-                type="number"
-                name="deliveryTime"
-                className="modal-input mx-auto"
-              />
-              <button
-                type="submit"
-                onClick={updateDeliveryTime}
-                className="driver-button blue modal-button mx-auto"
-              >
-                Update
-              </button>
-            </div>
-          </div>
-        </Modal>
-      </div>
-    )
-  );
+      )
+    );
+  }
 }
 
 export default DriverPage;
