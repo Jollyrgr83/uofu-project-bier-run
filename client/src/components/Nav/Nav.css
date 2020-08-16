@@ -4,30 +4,8 @@
     background-color: rgb(255, 192, 0) !important;
     padding: 1rem 1rem !important;
 }
-
 .local-nav-font {
   font-family: "Montserrat", sans-serif !important;
-}
-
-/* login button */
-.login-button {
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    margin-right: 25px;
-    width: 150px;
-    background-color: rgb(128, 0, 0);
-}
-
-.login-button:active, .login-button:enabled {
-    outline: none;
-}
-
-.login-button:hover {
-    outline: none;
-    opacity: .7;
-    background-color: rgb(75, 0, 0)!important;
 }
 /* text logo container */
 .text-logo {

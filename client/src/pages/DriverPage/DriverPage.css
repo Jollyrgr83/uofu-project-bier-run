@@ -4,7 +4,6 @@
   padding: 25px;
   background-color: rgb(230, 230, 230);
 }
-
 /* message elements (top row) */
 .welcome-container {
   font-family: "Montserrat", sans-serif;
@@ -16,19 +15,15 @@
   padding: 10px;
   margin: 15px;
 }
-
 .status {
   font-weight: bold;
 }
-
 .active {
   color: green;
 }
-
 .inactive {
   color: red;
 }
-
 /* order row elements */
 .order-card {
   border: solid 1px black;
@@ -40,7 +35,6 @@
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
 }
-
 .order-card-selected {
   border: solid 1px black;
   box-shadow: 3px 3px 6px black;
@@ -51,15 +45,12 @@
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
 }
-
 .order-item {
   margin: 20px;
 }
-
 .order-button-container {
   margin: 10px;
 }
-
 /* button style */
 .driver-button {
   outline: none;
@@ -70,42 +61,34 @@
   width: 275px;
   color: white;
 }
-
 .driver-button:active, .driver-button:enabled {
   outline: none;
 }
-
 .driver-button:hover {
   outline: none;
   opacity: 0.7;
 }
-
 .blue {
   background-color: blue;
 }
-
 .red {
   background-color: red;
 }
-
 .green {
   background-color: green;
 }
-
 /* modal components */
 .modal-title-driver {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   text-align: center;
 }
-
 .modal-input {
   width: 90%;
   margin: 15px;
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
 }
-
 .modal-button {
   width: 90%;
   margin: 15px;
