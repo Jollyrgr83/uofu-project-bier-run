@@ -1,3 +1,4 @@
+/* CUSTOMERPAGE STYLESHEET */
 /* main container */
 .main-container {
   margin: 0 10px 0 10px;
@@ -136,20 +137,28 @@
 }
 
 /* address modal elements */
-.address-modal-input {
+.address-modal-title {
   width: 90%;
   font-family: "Montserrat", sans-serif;
-  font-size: 16px;
+  font-size: 21px;
+  margin: 10px;
+  text-align: center;
 }
 
 .address-modal-label {
   width: 90%;
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
+  text-align: left;
 }
 
-.address-model-title {
+.address-modal-input {
   width: 90%;
   font-family: "Montserrat", sans-serif;
-  font-size: 24px;
+  font-size: 16px;
+}
+
+.address-modal-button {
+  width: 90%;
+  margin: 25px;
 }

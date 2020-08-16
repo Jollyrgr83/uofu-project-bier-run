@@ -53,20 +53,22 @@ function CustomerPage() {
     text: "",
     orderID: "",
     arrivalTime: "",
+    display: "You have no active orders."
   });
   // order info for shopping cart message after submitting order
   const [placeOrderMessage, setPlaceOrderMessage] = useState({
     text: "",
     isShow: false,
   });
-  // enter address modal open state 
+  // enter address modal open state
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
   // user input for delivery address from enter address modal
   const [addressInfo, setAddressInfo] = useState({
     street: "",
     city: "",
     state: "",
-    zip: ""
+    zip: "",
+    display: "not entered yet"
   });
   // useEffect to load beer inventory from API on page load
   useEffect(() => {
@@ -90,21 +92,11 @@ function CustomerPage() {
   }
 
   function loadInventory() {
-    console.log("isAuthenticated before setInventory: ", isAuthenticated);
     API.getInventory().then((res) => {
       setInventory({
         images: [...API.images],
         beers: res,
       });
-      console.log("isAuthenticated after setInventory: ", isAuthenticated);
-    });
-  }
-  // capture user inputs from enter address modal
-  function handleInputChange(event) {
-    const name = event.target.name;
-    const value = event.target.value;
-    setAddressInfo({
-      [name]: value
     });
   }
   // handles beer selection modal open/close
@@ -116,9 +108,13 @@ function CustomerPage() {
   }
   // handles enter address modal open/close
   function toggleAddressModal(event) {
-    setIsAddressModalOpen(!isAddressModalOpen);
+    if (order.totalItems === 0) {
+      return;
+    } else {
+      setIsAddressModalOpen(!isAddressModalOpen);
+    }
   }
-  // renders beer selection modal based on selection 
+  // renders beer selection modal based on selection
   function renderModal(beerName) {
     setModalState({
       modalName: beerName,
@@ -149,24 +145,30 @@ function CustomerPage() {
   // captures shopping cart object and sends to API
   function placeOrder(e) {
     e.preventDefault();
-    if (order.totalItems === 0) {
-      return;
-    } else {
-      const orderDetails = JSON.stringify(order.order);
-      const orderObj = {
-        orderDetails: orderDetails,
-        totalPrice: order.totalPrice,
-        totalItems: order.totalItems,
-        customerID: "testCustomerID",
-      };
-      API.sendOrder(orderObj).then((res) => {
-        console.log("sendOrder res", res);
-        setPlaceOrderMessage({
-          isShow: true,
-          text: `Your order has been placed. Your order ID is: ${res.data._id}`,
-        });
+    var streetInput = document.getElementById("street");
+    var cityInput = document.getElementById("city");
+    var stateInput = document.getElementById("state");
+    var zipInput = document.getElementById("zip");
+    var addressString = `${streetInput.value}, ${cityInput.value}, ${stateInput.value}, ${zipInput.value}`;
+    setAddressInfo({display: addressString});
+    const orderDetails = JSON.stringify(order.order);
+    const orderObj = {
+      orderDetails: orderDetails,
+      totalPrice: order.totalPrice,
+      totalItems: order.totalItems,
+      customerID: user.email,
+      address: addressString,
+      userID: user.email
+    };
+    console.log("orderObj", orderObj);
+    API.sendOrder(orderObj).then((res) => {
+      console.log("sendOrder res", res);
+      setPlaceOrderMessage({
+        isShow: true,
+        text: `Your order has been placed. Your order ID is: ${res.data._id}`,
       });
-    }
+    });
+    toggleAddressModal();
   }
   // page render
   return (
@@ -176,12 +178,12 @@ function CustomerPage() {
         <div className="row message-container">
           <div className="col-sm-8">
             <p className="welcome">
-              Welcome {user.name}, your address is: [user address]
+              Welcome {user.name}, your address is: {addressInfo.display}
             </p>
           </div>
           <div className="col-sm-4">
             <p className="welcome">
-              Your order [order ID] should arrive at [arrival time].
+              {orderMessage.display}
             </p>
           </div>
         </div>
@@ -227,16 +229,46 @@ function CustomerPage() {
           style={customStyles}
         >
           <div>
-            <div className="address-modal-title">Enter Your Address:</div>
-            <div className="address-modal-label">Street Address:</div>
-            <input className="address-modal-input" name="street" type="text" onChange={handleInputChange} />
-            <div className="address-modal-label">City:</div>
-            <input className="address-modal-input" name="city" type="text" onChange={handleInputChange} />
-            <div className="address-modal-label">State:</div>
-            <input className="address-modal-input" name="state" type="text" onChange={handleInputChange} />
-            <div className="address-modal-label">Zip Code:</div>
-            <input className="address-modal-input" name="zip" type="text" onChange={handleInputChange} />
-          
+            <div className="address-modal-title mx-auto">Enter Delivery Address:</div>
+            <div className="text-center">
+              <div className="address-modal-label mx-auto">Street Address:</div>
+              <input
+                className="address-modal-input mx-auto"
+                name="street"
+                type="text"
+                id="street"
+              />
+            </div>
+            <div className="text-center">
+              <div className="address-modal-label mx-auto">City:</div>
+              <input
+                className="address-modal-input mx-auto"
+                name="city"
+                type="text"
+                id="city"
+              />
+            </div>
+            <div className="text-center">
+              <div className="address-modal-label mx-auto">State:</div>
+              <input
+                className="address-modal-input mx-auto"
+                name="state"
+                type="text"
+                id="state"
+              />
+            </div>
+            <div className="text-center">
+              <div className="address-modal-label mx-auto">Zip Code:</div>
+              <input
+                className="address-modal-input mx-auto"
+                name="zip"
+                type="text"
+                id="zip"
+              />
+            </div>
+            <div className="text-center mx-auto">
+              <button className="modalButton blue mx-auto" onClick={placeOrder}>Submit</button>
+            </div>
           </div>
         </Modal>
         <div className="row customer-background">
