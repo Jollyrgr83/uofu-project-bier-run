@@ -9,6 +9,7 @@ const LogoutLink = () => {
 
   function clearSession() {
     sessionStorage.clear();
+    logout();
   }
 
   return (

@@ -13,7 +13,7 @@ import "../../assets/fonts/Stencil.ttf";
 
 function Nav() {
   // authentication
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   return (
     <div>
       <nav className="navbar navbar-light local-nav-font">
