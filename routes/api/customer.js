@@ -16,5 +16,8 @@ router.route("/active/:customerID")
   // GET: retrieves and sends active orders for CUSTOMERPAGE
   .get(orderController.findOrdersByCustomer);
 
+  router.route("/receipt/:orderID")
+  // GET: generates and sends pdf
+  .get(orderController.createPDF);
 
 module.exports = router;

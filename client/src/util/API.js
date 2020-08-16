@@ -1,6 +1,7 @@
 // API UTILITY
 // dependencies
 import axios from "axios";
+import pdfMake from "pdfmake";
 // logo images
 import bud from "../assets/logos/bud.jpg";
 import budLight from "../assets/logos/bud-light.png";
@@ -74,6 +75,12 @@ export default {
   // retrieves user's active orders
   getUserOrderData: function(userID) {
     return axios.get("/api/customer/active/" + userID).then(res => {
+      return res;
+    });
+  },
+  getPDF: function(orderID) {
+    return axios.get("/api/customer/receipt/" + orderID).then(res => {
+      pdfMake.createPdf(res.data).download();
       return res;
     });
   }

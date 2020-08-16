@@ -133,6 +133,10 @@ function DriverPage() {
     // trigger loadSelectedOrders to refresh user data
     setDeliveryState(!deliveryState);
   }
+  // gets pdf of order details
+  function getPDF(event) {
+    API.getPDF(event.target.id);
+  }
 
   console.log("isAuthenticated", isAuthenticated);
   console.log("user", user);
@@ -205,7 +209,7 @@ function DriverPage() {
                       <div className="col-sm-4 order-item">
                         Order Details:
                         <br />
-                        <a href="/">{x._id}</a>
+                        <div onClick={getPDF} className="order-link" id={x._id}>{x._id}</div>
                       </div>
                       <div className="col-sm-4 order-item">
                         Address:
@@ -258,7 +262,7 @@ function DriverPage() {
                       <div className="col-sm-4 order-item">
                         Order Details:
                         <br />
-                        <a href="/">{x._id}</a>
+                        <div onClick={getPDF} className="order-link" id={x._id}>{x._id}</div>
                       </div>
                       <div className="col-sm-4 order-item">
                         Address:
