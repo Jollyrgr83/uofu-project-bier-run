@@ -1,6 +1,9 @@
+// CUSTOMERPAGE UTILITY
+// used to serialize ids for beer inventory items
 let counter = 0;
 
 const customerPageUtil = {
+  // used to convert serialized form data to JSON
   toSimpleJSON: (serializedData) => {
     var ar1 = serializedData.split("&");
     var json = "{";
@@ -13,7 +16,7 @@ const customerPageUtil = {
     json += "}";
     return JSON.parse(json);
   },
-
+  // used to serialize beer selection modal form data
   addToOrderInstance: () => {
     const orderArray = Array.from(
       new FormData(document.getElementById("modalForm")),
@@ -24,7 +27,7 @@ const customerPageUtil = {
       .replace(/%2C/g, ",");
     return orderArray;
   },
-
+  // removes blank entries from form data
   removeBlankEntries: (orderJSON) => {
     const objKeys = Object.keys(orderJSON);
     let newArr = [];
