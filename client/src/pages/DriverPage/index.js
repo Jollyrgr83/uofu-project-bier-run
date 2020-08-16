@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import "./DriverPage.css";
 // API functions
 import API from "../../util/API";
+// utils
+import driverPageUtil from "../../util/driverPageUtil";
 // authentication
 import { useAuth0 } from "@auth0/auth0-react";
 // modal component from react-modal package
@@ -51,8 +53,6 @@ const dummyOrders = [
   },
 ];
 
-const dummyState = false;
-
 function DriverPage() {
   // authentication
   const { user, isAuthenticated, isLoading } = useAuth0(); 
@@ -63,59 +63,69 @@ function DriverPage() {
   // ETA modal open state
   const [isOpen, setIsOpen] = useState(false);
   // stores users delivery state (active/inactive)
-  const [deliveryState, setDeliveryState] = useState();
+  const [deliveryState, setDeliveryState] = useState(false);
   // stores orders from API call
   const [orders, setOrders] = useState({
     sortedOrders: [],
   });
+  // used to identify active order when updating selected status and ETA
+  const [activeOrder, setActiveOrder] = useState();
   // useEffect to load orders from API on page load
   useEffect(() => {
     loadOrders();
   }, []);
   // loads orders from API and sorts based on selected status
   function loadOrders() {
-    const sortedArray = dummyOrders.sort((a, b) => {
-      if (a.inProgress > b.inProgress) {
-        return -1;
-      } else {
-        return 1;
-      }
+    API.getOrders().then(res => {
+      console.log("getOrders res.data: ", res.data);
+      const sortedArray = driverPageUtil.sortBySelectedStatus(res.data);
+      const numSelectedOrders = driverPageUtil.countSelectedOrders(res.data);
+      console.log("sortedOrders", sortedArray);
+      setOrders({
+        rawOrders: [...res.data],
+        sortedOrders: [...sortedArray],
+      });
+      setSelectedDeliveries({
+        count: numSelectedOrders
+      });
     });
-    setOrders({
-      rawOrders: [...dummyOrders],
-      sortedOrders: [...sortedArray],
-    });
-    loadSelectedOrders();
-  }
-  // loads user info from API call and updates welcome message in top row
-  function loadSelectedOrders() {
-    // get user info from login and database
-    setDeliveryState(dummyState);
   }
   // handles ETA modal open/close
   function toggleModal() {
     setIsOpen(!isOpen);
   }
   // updates order status as selected to API
-  function selectOrder() {
-    // use API to update order's inProgress to true and send to database
-    // trigger loadOrders to refresh order list
+  function selectOrder(event) {
     toggleModal();
+    setActiveOrder(event.target.id);
   }
   // updates order ETA to API
   function updateDeliveryTime(event) {
-    // event.preventDefault();
+    const selectedETA = document.getElementById("ETA");
+    API.selectOrder(activeOrder, selectedETA.value).then(res => {
+      console.log("selectOrder res", res);
+      // trigger loadOrders to refresh order list
+      loadOrders();
+    });
     toggleModal();
   }
   // updates order delivered status to API
-  function deliverOrder() {
+  function deliverOrder(event) {
+    setActiveOrder(event.target.id);
     // use API to update order status as delivered
-    // trigger loadOrders to refresh order list
+    API.deliverOrder(event.target.id).then(res => {
+      // trigger loadOrders to refresh order list
+      loadOrders();
+    });
   }
   // updates order status as unselected to API
-  function unselectOrder() {
+  function unselectOrder(event) {
+    setActiveOrder(event.target.id);
     // use API to update order's inProgress to false
-    // trigger loadOrders to refresh order list
+    API.unselectOrder(event.target.id).then(res => {
+      // trigger loadOrders to refresh order list
+      loadOrders();
+    });
   }
   // updates drivers delivery status to API
   function updateDriverStatus() {
@@ -178,24 +188,24 @@ function DriverPage() {
           {orders.sortedOrders.map((x) => {
             if (x.inProgress === true) {
               return (
-                <div className="row order-card-selected mx-auto" key={x.id}>
+                <div className="row order-card-selected mx-auto" key={x._id}>
                   <div className="col-sm-8">
                     <div className="row">
                       <div className="col-sm-4 order-item">
                         Order ID:
                         <br />
-                        {x.id}
+                        {x._id}
                       </div>
                       <div className="col-sm-4 order-item">
                         Price:
-                        <br />${x.totalPrice}
+                        <br />${parseFloat((x.totalPrice).toFixed(2))}
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-sm-4 order-item">
                         Order Details:
                         <br />
-                        <a href="">{x.id}</a>
+                        <a href="/">{x._id}</a>
                       </div>
                       <div className="col-sm-4 order-item">
                         Address:
@@ -208,18 +218,21 @@ function DriverPage() {
                     <button
                       onClick={unselectOrder}
                       className="driver-button red mx-auto"
+                      id={x._id}
                     >
                       Unselect
                     </button>
                     <button
-                      onClick={toggleModal}
+                      onClick={selectOrder}
                       className="driver-button blue mx-auto"
+                      id={x._id}
                     >
                       Update
                     </button>
                     <button
                       onClick={deliverOrder}
                       className="driver-button green mx-auto"
+                      id={x._id}
                     >
                       Delivered
                     </button>
@@ -228,24 +241,24 @@ function DriverPage() {
               );
             } else {
               return (
-                <div className="row order-card mx-auto" key={x.id}>
+                <div className="row order-card mx-auto" key={x._id}>
                   <div className="col-sm-8">
                     <div className="row">
                       <div className="col-sm-4 order-item">
                         Order ID:
                         <br />
-                        {x.id}
+                        {x._id}
                       </div>
                       <div className="col-sm-4 order-item">
                         Price:
-                        <br />${x.totalPrice}
+                        <br />${parseFloat((x.totalPrice).toFixed(2))}
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-sm-4 order-item">
                         Order Details:
                         <br />
-                        <a href="">{x.id}</a>
+                        <a href="/">{x._id}</a>
                       </div>
                       <div className="col-sm-4 order-item">
                         Address:
@@ -258,6 +271,7 @@ function DriverPage() {
                     <button
                       onClick={selectOrder}
                       className="driver-button blue mx-auto"
+                      id={x._id}
                     >
                       Select
                     </button>
@@ -281,6 +295,7 @@ function DriverPage() {
                   type="number"
                   name="deliveryTime"
                   className="modal-input mx-auto"
+                  id="ETA"
                 />
                 <button
                   type="submit"

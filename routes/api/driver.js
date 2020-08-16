@@ -8,6 +8,8 @@ const inventoryController = require("../../controllers/InventoryController");
 // configure routes
 router.route("/")
   // GET: retrieves and sends all active orders for DRIVERPAGE
-  .get(orderController.findAllActiveOrders);
+  .get(orderController.findAllActiveOrders)
+  // PUT: updates selected status or ETA from DRIVERPAGE
+  .put(orderController.updateStatus)
 
 module.exports = router;

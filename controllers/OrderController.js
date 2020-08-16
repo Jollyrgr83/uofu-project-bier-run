@@ -7,18 +7,17 @@ module.exports = {
   findAllActiveOrders: function(req, res) {
     db.Order
       .find({
-        inProgress: false
+        complete: false
       })
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   // sends all non-delivered (active) and selected orders by driver ID
-  findAllOrdersByDriver: function(req, res) {
+  findOrdersByCustomer: function(req, res) {
     db.Order
       .find({
-        inProgress: true,
-        driverID: req.driverID
+        customerID: req.params.customerID
       })
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
@@ -32,9 +31,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   // updates order to selected status and adds driver ID
-  driverSelectOrder: function(req, res) {
+  updateStatus: function(req, res) {
     db.Order
-      .findByIdAndUpdate(req.body.orderID, { $set: { inProgress: true, driverID: req.body.driverID }})
+      .findByIdAndUpdate(req.body.orderID, { $set: { inProgress: req.body.inProgress, estimatedTime: parseInt(req.body.ETA), complete: req.body.complete }})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

@@ -23,7 +23,7 @@ export default {
     { name: "Michelob Ultra", logo: michelobUltra, id: 6 },
     { name: "Miller Lite", logo: millerLite, id: 7 },
   ],
-  // Gets inventory data for customer page
+  // gets inventory data for customer page
   getInventory: function () {
     return axios.get("/api/customer").then((res) => {
       const receivedData = {};
@@ -44,6 +44,36 @@ export default {
   // sends customer order to database server
   sendOrder: function (orderObj) {
     return axios.post("/api/customer", orderObj).then((res) => {
+      return res;
+    });
+  },
+  // gets order data for driver page
+  getOrders: function() {
+    return axios.get("/api/driver").then(res => {
+      return res;
+    });
+  },
+  // updates order's selected status
+  selectOrder: function(orderID, ETA) {
+    return axios.put("/api/driver", { orderID: orderID, ETA: ETA, inProgress: true, complete: false }).then(res => {
+      return res;
+    });
+  },
+  // updates order's selected status
+  unselectOrder: function(orderID) {
+    return axios.put("/api/driver", { orderID: orderID, ETA: "999", inProgress: false, complete: false }).then(res => {
+      return res;
+    });
+  },
+  // updates order's complete status
+  deliverOrder: function(orderID) {
+    return axios.put("/api/driver", { orderID: orderID, ETA: "998", inProgress: false, complete: true }).then(res => {
+      return res;
+    });
+  },
+  // retrieves user's active orders
+  getUserOrderData: function(userID) {
+    return axios.get("/api/customer/active/" + userID).then(res => {
       return res;
     });
   }
