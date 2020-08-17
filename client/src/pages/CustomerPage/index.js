@@ -23,6 +23,8 @@ const customStyles = {
   },
 };
 
+let renderCounter = 0;
+
 Modal.setAppElement("#root");
 
 function CustomerPage() {
@@ -45,7 +47,7 @@ function CustomerPage() {
   });
   // order info for order status message in top row
   const [orderMessage, setOrderMessage] = useState({
-    display: "You have no active orders."
+    display: "You have no active orders.",
   });
   // order info for shopping cart message after submitting order
   const [placeOrderMessage, setPlaceOrderMessage] = useState({
@@ -60,12 +62,12 @@ function CustomerPage() {
     city: "",
     state: "",
     zip: "",
-    display: "not entered yet"
+    display: "not entered yet",
   });
   // useEffect to load beer inventory from API on page load
   useEffect(() => {
     loadInventory();
-  }, []);
+  }, [isLoading]);
 
   function loadUserOrderMessage() {
     API.getUserOrderData(user.email).then((res) => {
@@ -74,9 +76,13 @@ function CustomerPage() {
         setOrderMessage({ display: "You have no active orders." });
       } else {
         if (res.data[0].inProgress === false) {
-          setOrderMessage({ display: `Your order ${res.data[0]._id} is waiting on a driver.`});
+          setOrderMessage({
+            display: `Your order ${res.data[0]._id} is waiting on a driver.`,
+          });
         } else {
-          setOrderMessage({ display: `Your order ${res.data[0]._id} should arrive in less than ${res.data[0].estimatedTime} minutes.`});    
+          setOrderMessage({
+            display: `Your order ${res.data[0]._id} should arrive in less than ${res.data[0].estimatedTime} minutes.`,
+          });
         }
       }
     });
@@ -141,7 +147,7 @@ function CustomerPage() {
     var stateInput = document.getElementById("state");
     var zipInput = document.getElementById("zip");
     var addressString = `${streetInput.value}, ${cityInput.value}, ${stateInput.value}, ${zipInput.value}`;
-    setAddressInfo({display: addressString});
+    setAddressInfo({ display: addressString });
     const orderDetails = JSON.stringify(order.order);
     const orderObj = {
       orderDetails: orderDetails,
@@ -149,7 +155,7 @@ function CustomerPage() {
       totalItems: order.totalItems,
       customerID: user.email,
       address: addressString,
-      userID: user.email
+      userID: user.email,
     };
     console.log("orderObj", orderObj);
     API.sendOrder(orderObj).then((res) => {
@@ -161,13 +167,13 @@ function CustomerPage() {
     });
     toggleAddressModal();
   }
+  renderCounter++;
+  console.log("Page Render: ", renderCounter);
   // page render
   if (isLoading) {
-    return (
-      <h1>Please wait... loading page</h1>
-    );
+    return <h1>Please wait... loading page</h1>;
   } else {
-    loadUserOrderMessage();
+    // loadUserOrderMessage();
     return (
       // protected route - only renders after successful login
       isAuthenticated && (
@@ -184,7 +190,10 @@ function CustomerPage() {
             </div>
             <div className="col-sm-4">
               <p className="welcome">
-                {orderMessage.display}
+                {orderMessage.display} <br />{" "}
+                <span className="refresh" onClick={loadUserOrderMessage}>
+                  Refresh Status
+                </span>
               </p>
             </div>
           </div>
@@ -230,9 +239,13 @@ function CustomerPage() {
             style={customStyles}
           >
             <div>
-              <div className="address-modal-title mx-auto">Enter Delivery Address:</div>
+              <div className="address-modal-title mx-auto">
+                Enter Delivery Address:
+              </div>
               <div className="text-center">
-                <div className="address-modal-label mx-auto">Street Address:</div>
+                <div className="address-modal-label mx-auto">
+                  Street Address:
+                </div>
                 <input
                   className="address-modal-input mx-auto"
                   name="street"
@@ -268,7 +281,12 @@ function CustomerPage() {
                 />
               </div>
               <div className="text-center mx-auto">
-                <button className="modalButton blue mx-auto" onClick={placeOrder}>Submit</button>
+                <button
+                  className="modalButton blue mx-auto"
+                  onClick={placeOrder}
+                >
+                  Submit
+                </button>
               </div>
             </div>
           </Modal>
@@ -308,7 +326,10 @@ function CustomerPage() {
                   <hr></hr>
                   <p>Total Items: {order.totalItems}</p>
                   <p>Total: ${order.totalPrice.toFixed(2)}</p>
-                  <button className="orderButton mx-auto" onClick={toggleAddressModal}>
+                  <button
+                    className="orderButton mx-auto"
+                    onClick={toggleAddressModal}
+                  >
                     Place Order
                   </button>
                   <p

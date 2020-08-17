@@ -23,35 +23,9 @@ const customStyles = {
   }
 };
 
+let renderCounter = 0;
+
 Modal.setAppElement("#root");
-
-// const orderSchema = new Schema({
-//   orderDetails: { type: map, of: String },
-//   totalPrice: { type: Number, required: true },
-//   customerID: { type: String, required: true },
-//   inProgress: { type: Boolean, default: false, required: true },
-//   driverID: { type: String },
-//   estimatedTime: { type: Number },
-//   complete: { type: Boolean, default: false, required: true },
-//   deliveredDate: { type: Date },
-//   date: { type: Date, default: Date.now }
-// });
-
-const dummyOrders = [
-  {
-    id: "5f35cf06ca4b11d8d4f53288",
-    address: "123 Any Street, SLC, UT",
-    inProgress: false,
-    totalPrice: 109.96,
-  },
-
-  {
-    id: "5f35cf06ca4b11d8d4f53289",
-    address: "123 Any Street, SLC, UT",
-    inProgress: true,
-    totalPrice: 112.76,
-  },
-];
 
 function DriverPage() {
   // authentication
@@ -73,7 +47,7 @@ function DriverPage() {
   // useEffect to load orders from API on page load
   useEffect(() => {
     loadOrders();
-  }, []);
+  }, [isLoading, isAuthenticated]);
   // loads orders from API and sorts based on selected status
   function loadOrders() {
     API.getOrders().then(res => {
@@ -138,8 +112,8 @@ function DriverPage() {
     API.getPDF(event.target.id);
   }
 
-  console.log("isAuthenticated", isAuthenticated);
-  console.log("user", user);
+  renderCounter++;
+  console.log("Page Render: ", renderCounter);
 
   // page render
   if (isLoading) {
@@ -149,7 +123,7 @@ function DriverPage() {
   } else {
     return (
       // protected route - only renders after successful login
-      // isAuthenticated && 
+      isAuthenticated && 
       (
         <div className="driver-main-container">
           <div className="row welcome-container mx-auto">
