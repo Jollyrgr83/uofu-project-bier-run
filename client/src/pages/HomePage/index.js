@@ -1,38 +1,42 @@
 // HOMEPAGE
 // react
-import React from "react";
+import React, { useState, useEffect } from "react";
 // stylesheet
 import "./HomePage.css";
 // animation package
-import { useSpring, animated } from "react-spring";
+import { useTransition, animated, config } from "react-spring";
 // logo image
 import logo from "../../assets/images/BierRunLogoNoBG.svg";
+// secret logo image
+import easterEgg from "../../assets/images/JediMasterBarry.svg";
 // page components
 import LoginButton from "../../components/Buttons/LoginButton";
 
+const slides = [
+  { id: 0, url: logo },
+  { id: 1, url: easterEgg }
+];
 function HomePage() {
-  const calc = (x, y) => [
-    -(y - window.innerHeight / 2) / 20,
-    (x - window.innerWidth / 2) / 20,
-    1.1,
-  ];
-  const trans = (x, y, s) =>
-    `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
-  const [props, set] = useSpring(() => ({
-    xys: [0, 0, 1],
-    config: { mass: 5, tension: 100, friction: 20 },
-  }));
-
+  const [index, set] = useState(0)
+  const transitions = useTransition(slides[index], item => item.id, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: config.molasses,
+  })
+  useEffect(() => void setInterval(() => set(state => (state + 1) % 2), 5000), [])
   return (
     <main>
-      <div className="text-center">
-        <animated.img
-          className="logo"
-          src={logo}
-          onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
-          onMouseLeave={() => set({ xys: [0, 0, 1] })}
-          style={{ transform: props.xys.interpolate(trans) }}
-        />
+      <div className="text-center logo-container mx-auto">
+        {transitions.map(({ item, props, key }) => (
+          <animated.div
+            key={key}
+            className="logo mx-auto c"
+            src={logo}
+            alt="Normal Barry"
+            style={{ ...props, backgroundImage: `url(${item.url})` }}
+          ></animated.div>
+        ))}
       </div>
       <h1>How does it work?</h1>
       <div className="row">

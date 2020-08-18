@@ -28,3 +28,7 @@
   padding: 5px;
   margin-right: 25px;
 }
+/* hover link effects */
+#home, #customer, #driver, .text-logo:hover, .text-bier:hover, .text-run:hover {
+  cursor: pointer;
+}

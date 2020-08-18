@@ -1,6 +1,6 @@
 // APP
 // react
-import React from 'react';
+import React, { useState } from 'react';
 // react router
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // pages
@@ -11,24 +11,43 @@ import CustomerPage from "./pages/CustomerPage";
 import Nav from "./components/Nav"
 
 function App() {
+  // used to handle page navigation
+  const [activePage, setActivePage] = useState("home");
+  // handles page navigation
+  function selectPage(event) {
+    setActivePage(event.target.id);
+  }
+
+  function loadPage() {
+    if (activePage === "customer") {
+      return (
+        <CustomerPage />
+      );
+    } else if (activePage === "driver") {
+      return (
+        <DriverPage />);
+    } else {
+      return (
+        <HomePage />
+        );
+    }
+  }
+
   return (
     <Router>
       <div>
-        <Nav />
+        <Nav handleNav={selectPage} />
         <Switch>
           <Route exact path={["/"]}>
             <HomePage />
           </Route>
-          <Route exact path={["/driver"]}>
-            <DriverPage />
-          </Route>
-          <Route exact path={["/customer"]}>
-            <CustomerPage />
+          <Route exact path={["/index"]}>
+            {loadPage()}
           </Route>
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
 export default App;
