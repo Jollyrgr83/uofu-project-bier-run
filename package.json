@@ -19,6 +19,7 @@
     "if-env": "^1.0.4",
     "mongoose": "^5.9.29",
     "pdfmake": "^0.1.68",
+    "react-spring": "^8.0.27",
     "request": "^2.88.2"
   },
   "author": "",
