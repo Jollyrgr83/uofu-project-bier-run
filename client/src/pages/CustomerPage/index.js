@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 // stylesheet
 import "./CustomerPage.css";
+// animation package
+import { useSpring, animated } from "react-spring";
 // API functions
 import API from "../../util/API";
 // utility functions
@@ -28,6 +30,18 @@ let renderCounter = 0;
 Modal.setAppElement("#root");
 
 function CustomerPage() {
+  const calc = (x, y) => [
+    -(y - window.innerHeight / 2) / 20,
+    (x - window.innerWidth / 2) / 20,
+    1.1,
+  ];
+  const trans = (x, y, s) =>
+    `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 5, tension: 350, friction: 40 },
+  }));
+
   // authentication
   const { user, isAuthenticated, isLoading } = useAuth0();
   // inventory elements (logos, names, and quantity options)
@@ -295,12 +309,17 @@ function CustomerPage() {
               <div className="row text-center">
                 {inventory.images.map((x) => {
                   return (
-                    <img
+                    <animated.img
                       key={x.id}
                       src={x.logo}
                       alt={x.name}
                       className="inventory-card mx-auto"
                       onClick={toggleModal}
+                      onMouseMove={({ clientX: x, clientY: y }) =>
+                        set({ xys: calc(x, y) })
+                      }
+                      onMouseLeave={() => set({ xys: [0, 0, 1] })}
+                      style={{ transform: props.xys.interpolate(trans) }}
                     />
                   );
                 })}
