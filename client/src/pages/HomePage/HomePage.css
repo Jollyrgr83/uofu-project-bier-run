@@ -43,6 +43,15 @@ main {
 .front {
   background-image: url("../../assets/images/JediMasterBarry.svg");
 }
+/* non-animated logo (for mobile) */
+.logo-mobile {
+  margin: 25px 0 0 0;
+  width: 100%;
+}
+.secret-logo-mobile {
+  margin: 25px 0 0 0;
+  width: 50%;
+}
 /* headers and text */
 h1 {
   font-family: "Montserrat", sans-serif;
