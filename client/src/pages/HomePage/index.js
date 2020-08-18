@@ -12,32 +12,70 @@ import easterEgg from "../../assets/images/JediMasterBarry.svg";
 // page components
 import LoginButton from "../../components/Buttons/LoginButton";
 
+// used for non-mobile logo animation
 const slides = [
   { id: 0, url: logo, className: "logo" },
   { id: 1, url: easterEgg, className: "secret-logo" }
 ];
+
 function HomePage() {
-  const [index, set] = useState(0)
+  // sets toggleState for mobile logo animation
+  const [isJedi, setIsJedi] = useState(false);
+  // sets slides index for non-mobile logo animation
+  const [index, setImage] = useState(0)
+  // used for non-mobile logo animation
   const transitions = useTransition(slides[index], item => item.id, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
     config: config.molasses,
   })
-  useEffect(() => void setInterval(() => set(state => (state + 1) % 2), 5000), [])
+  // updates non-mobile logo animation
+  useEffect(() => void setInterval(() => setImage(state => (state + 1) % 2), 5000), [])
+  // loads mobile or non-mobile logo animation
+  function loadLogo() {
+    if (window.screen.availWidth <= 500) {
+      return (
+        <div className="text-center mx-auto">
+          {loadMobileImage()}
+        </div>
+      );
+    } else {
+      return (
+        <div className="logo-container text-center mx-auto">
+          {transitions.map(({ item, props, key }) => (
+            <animated.div
+              key={key}
+              className={`${item.className} c mx-auto`}
+              src={logo}
+              alt="Normal Barry"
+              style={{ ...props, backgroundImage: `url(${item.url})` }}
+            ></animated.div>
+          ))}
+        </div>
+      );
+    }
+  }
+  // determines mobile logo img file
+  function loadMobileImage() {
+    if (isJedi) {
+      return (
+        <img className="secret-logo-mobile mx-auto" src={easterEgg} alt="Jedi Barry" onClick={becomeJedi} />
+      );
+    } else {
+      return (
+        <img className="logo-mobile mx-auto" src={logo} alt="Normal Barry" onClick={becomeJedi} />
+      );
+    }
+  }
+  // switches mobile logo on click
+  function becomeJedi() {
+    setIsJedi(!isJedi);
+  }
+
   return (
     <main>
-      <div className="logo-container text-center mx-auto">
-        {transitions.map(({ item, props, key }) => (
-          <animated.div
-            key={key}
-            className={`${item.className} c mx-auto`}
-            src={logo}
-            alt="Normal Barry"
-            style={{ ...props, backgroundImage: `url(${item.url})` }}
-          ></animated.div>
-        ))}
-      </div>
+      {loadLogo()}
       <h1>How does it work?</h1>
       <div className="row">
         <div className="col-sm-4 thirds">

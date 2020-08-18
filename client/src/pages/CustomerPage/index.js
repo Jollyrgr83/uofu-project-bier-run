@@ -184,6 +184,41 @@ function CustomerPage() {
   }
   renderCounter++;
   console.log("Page Render: ", renderCounter);
+  // determines animation state for beer cards based on mobile layout or not
+  function loadCards() {
+    if (window.screen.availWidth <= 500) {
+      return (
+        <div className="row text-center">
+          {inventory.images.map((x) => {
+            return (
+              <img key={x.id} src={x.logo} alt={x.name} className="inventory-card mx-auto" onClick={toggleModal} />
+            );
+          })}
+        </div>
+      );
+    } else {
+      return (
+        <div className="row text-center">
+        {inventory.images.map((x) => {
+          return (
+            <animated.img
+              key={x.id}
+              src={x.logo}
+              alt={x.name}
+              className="inventory-card mx-auto"
+              onClick={toggleModal}
+              onMouseMove={({ clientX: x, clientY: y }) =>
+                set({ xys: calc(x, y) })
+              }
+              onMouseLeave={() => set({ xys: [0, 0, 1] })}
+              style={{ transform: props.xys.interpolate(trans) }}
+            />
+          );
+        })}
+      </div>
+      );
+    }
+  }
   // page render
   if (isLoading) {
     return <h1>Please wait... loading page</h1>;
@@ -307,24 +342,7 @@ function CustomerPage() {
           </Modal>
           <div className="row customer-background">
             <div className="col-sm-8">
-              <div className="row text-center">
-                {inventory.images.map((x) => {
-                  return (
-                    <animated.img
-                      key={x.id}
-                      src={x.logo}
-                      alt={x.name}
-                      className="inventory-card mx-auto"
-                      onClick={toggleModal}
-                      onMouseMove={({ clientX: x, clientY: y }) =>
-                        set({ xys: calc(x, y) })
-                      }
-                      onMouseLeave={() => set({ xys: [0, 0, 1] })}
-                      style={{ transform: props.xys.interpolate(trans) }}
-                    />
-                  );
-                })}
-              </div>
+              {loadCards()}
             </div>
             <div className="col-sm-4 mx-auto">
               <div className="cart-title mx-auto">
