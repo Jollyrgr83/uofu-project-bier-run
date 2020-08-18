@@ -1,68 +1,76 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Project-2 - Story Lines
 
-## Available Scripts
+## **Table of Contents**
 
-In the project directory, you can run:
+* Project Description
+* Project Objective
+* User Story
+* Usage
+* License
+* Contributors
+* Installation
+* Tests
+* Video of Deployed Application
 
-### `npm start`
+## **Description**
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+A simpler approach to agile project management. Fully manage your projects using agile concepts including projects, stories, and tasks without any unnecessary frustrations.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## **Objective**
 
-### `npm test`
+Project management applications, such as Jira Software by Atlassian, are supremely helpful for agile teams through each stage of their project development.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Having a way to assign individual tasks, projects, and stories to each team member makes task delegation, tracking, and reaching deadlines both simple and organized.
 
-### `npm run build`
+We were motivated to create an effective application that was similar to these popular platforms but improved to our creative specifications. By first identifying what aspects of the existing system we wanted to change or improve, we then delegated tasks strategically.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+By utilizing the same mindset behind the need for an application like Jira, we were able to dynamically tackle each necessary task in a precise and organized manner.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## **User Story**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+As a busy software developer, I have a need for an easy-to-use project, story, and task management application.
 
-### `npm run eject`
+## **Usage**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* Our program allows for a user login & sign-up before the app can be accessed.
+* The sign-up feature automatically sends a welcome email and text message provided by the user. This information is saved for future logins and usage.
+* Once a user either logs-in or signs-up, they are taken to the main Dashboard page.
+* From the Dashboard page, the user may navigate to a number of funcional pages, including a Project page, a Story page, and a Search page.
+* The Dashboard page also provides the user with general information related to them, including active projects and active stories; each may be selected individually.
+* Our app’s Navbar uses vector art as clickable buttons for page navigation.
+* From the Navbar, the user can quickly Return Home, Add a Project, Search the App, as well as logout of their user account.
+* Upon logging-out, the user will be redirected to the sign-up page.
+* We color-coded the “days remaining” icons that rest beside each story on the Dashboard page in standard corresponding colors (red, yellow, green).
+* All stories, tasks, and projects can be edited after being created.
+* Our predefined sort categories are intentionally simple and straightforward.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## **License**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+MIT License. See LICENSE file for more information.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## **Contributors**
 
-## Learn More
+This was a group project completed as part of the UofU Coding Bootcamp.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **Contributors Include:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* [Jason Mangin](https://github.com/Jollyrgr83)
+* [Tyson Hintze](https://github.com/hintzetyson)
+* [Ahmed Jalal](https://github.com/ahmedjalal93)
+* [Natalie Michelsen](https://github.com/nataliemichelsen)
 
-### Code Splitting
+* Credit must also be noted for our instructor and TA's, as well as the author of our class curriculum and our SSM.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## **Installation**
 
-### Analyzing the Bundle Size
+Send me a message on GitHub, otherwise, feel free to clone or download.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## **Tests**
 
-### Making a Progressive Web App
+There are currently no tests for this app.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## **Video of Deployed Application**
 
-### Advanced Configuration
+[Video Demonstration](https://drive.google.com/file/d/14OGu3DZ7D_X_BcPv77HW5zV-VxBm53XE/view?usp=sharing)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![Deployed Application](/public/assets/images/video.gif)
