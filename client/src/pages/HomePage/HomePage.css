@@ -4,9 +4,41 @@ main {
   background-color: rgb(230, 230, 230);
 }
 /* logo elements */
+.logo-container {
+  height: 400px !important;
+  width: 100%;
+}
 .logo {
   margin: 50px 25px 0 25px;
   width: 30vh;
+}
+.secret-logo {
+  margin: 50px 25px 0 25px;
+  width: 15vh;
+}
+.c {
+  position: absolute;
+  top: 100;
+  left: 0;
+  width: 100vw;
+  height: 30vh;
+  background-size: 5%;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: opacity;
+}
+
+.front,
+.back {
+  background-size: cover;
+}
+
+.back {
+  background-image: url("../../assets/images/BierRunLogoNoBG.svg");
+}
+
+.front {
+  background-image: url("../../assets/images/JediMasterBarry.svg");
 }
 /* headers and text */
 h1 {

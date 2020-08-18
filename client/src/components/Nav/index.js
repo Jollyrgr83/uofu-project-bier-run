@@ -11,16 +11,16 @@ import LogoutLink from "../Links/LogoutLink";
 // stencil font for text logo
 import "../../assets/fonts/Stencil.ttf";
 
-function Nav() {
+function Nav({ handleNav }) {
   // authentication
   const { isAuthenticated } = useAuth0();
   return (
     <div>
       <nav className="navbar navbar-light local-nav-font">
-        <a className="navbar-brand text-logo" href="/">
+        <div className="navbar-brand text-logo" id="home" onClick={handleNav}>
           <span className="text-bier">BIER</span>
           <span className="text-run">RUN</span>
-        </a>
+        </div>
         <button
           className="navbar-toggler"
           type="button"
@@ -35,22 +35,22 @@ function Nav() {
         <div className="collapse navbar-collapse" id="navbarColor01">
           <div className="col-sm-6">
             <ul className="navbar-nav text-end">
-              <li className="nav-item active">
-                <a className="nav-link" href="/">
-                  Home <span className="sr-only">(current)</span>
-                </a>
+              <li className="nav-item">
+                <div className="nav-link" id="home" onClick={handleNav}>
+                  Home
+                </div>
               </li>
               {isAuthenticated ? (
                 <div>
                   <li className="nav-item">
-                    <a className="nav-link" href="/driver">
+                    <div className="nav-link" id="driver" onClick={handleNav}>
                       Driver Page (testing)
-                    </a>
+                    </div>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="/customer">
+                    <div className="nav-link" id="customer" onClick={handleNav}>
                       Place an Order
-                    </a>
+                    </div>
                   </li>
                   <li className="nav-item">
                     <LogoutLink />
