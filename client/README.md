@@ -1,48 +1,43 @@
-# Project-2 - Story Lines
+# BIER RUN
+
+[Go to Bier Run](https://bier-run.herokuapp.com/)
 
 ## **Table of Contents**
 
 * Project Description
-* Project Objective
-* User Story
 * Usage
+* Technology
 * License
 * Contributors
 * Installation
 * Tests
-* Video of Deployed Application
 
 ## **Description**
 
-A simpler approach to agile project management. Fully manage your projects using agile concepts including projects, stories, and tasks without any unnecessary frustrations.
+As the COVID-19 pandemic continues to change our ways of life, new opportunities emerge. The Utah House has been debating House Bill 203. If passed, this will allow certain Utah businesses with existing liquor and business licenses to conduct curb-side and home-delivery sales of certain beer. In the age of Doordash, Uber Eats, and Grub Hub, welcome to Bier Run!
 
-## **Objective**
+Connecting the thirsty home consumer with the licensed vendor, Bier Run allows:
 
-Project management applications, such as Jira Software by Atlassian, are supremely helpful for agile teams through each stage of their project development.
-
-Having a way to assign individual tasks, projects, and stories to each team member makes task delegation, tracking, and reaching deadlines both simple and organized.
-
-We were motivated to create an effective application that was similar to these popular platforms but improved to our creative specifications. By first identifying what aspects of the existing system we wanted to change or improve, we then delegated tasks strategically.
-
-By utilizing the same mindset behind the need for an application like Jira, we were able to dynamically tackle each necessary task in a precise and organized manner.
-
-## **User Story**
-
-As a busy software developer, I have a need for an easy-to-use project, story, and task management application.
+* Customers to quickly and easily browse inventory and place orders
+* Vendors to quickly and easily review, fulfill, and deliver orders
+* Through a secure, and easy-to-use application
 
 ## **Usage**
 
-* Our program allows for a user login & sign-up before the app can be accessed.
-* The sign-up feature automatically sends a welcome email and text message provided by the user. This information is saved for future logins and usage.
-* Once a user either logs-in or signs-up, they are taken to the main Dashboard page.
-* From the Dashboard page, the user may navigate to a number of funcional pages, including a Project page, a Story page, and a Search page.
-* The Dashboard page also provides the user with general information related to them, including active projects and active stories; each may be selected individually.
-* Our app’s Navbar uses vector art as clickable buttons for page navigation.
-* From the Navbar, the user can quickly Return Home, Add a Project, Search the App, as well as logout of their user account.
-* Upon logging-out, the user will be redirected to the sign-up page.
-* We color-coded the “days remaining” icons that rest beside each story on the Dashboard page in standard corresponding colors (red, yellow, green).
-* All stories, tasks, and projects can be edited after being created.
-* Our predefined sort categories are intentionally simple and straightforward.
+* Customers: Sign up for a free account or log in if you have ordered with us previously, select your desired beer options, place your order, and relax while our licensed vendor partners take care of your order.
+* Drivers: Your licensed employer will send your information for validation to our admin team for registration and signup. Log in to the site, select an order, print the pdf ticket, and  fulfill and deliver the order in accordance with your employer's internal processes.
+
+## **Technology**
+
+This project uses the following notable libraries and packages:
+
+* node, express, and react servers
+* pdfMake for quickly creating pdf files
+* react-spring for visually stunning animations
+* react-modal for easy-to-use modal components and integration
+* react
+* bootstrap
+* auth0 for easy to use and implement authentication
 
 ## **License**
 
@@ -54,23 +49,15 @@ This was a group project completed as part of the UofU Coding Bootcamp.
 
 ### **Contributors Include:**
 
+* [Austin Karren](https://github.io/KarrenAD)
+* [Blake Ford](https://github.io/blakeford1)
+* [Cade Clark](https://github.io/cadeclark)
 * [Jason Mangin](https://github.com/Jollyrgr83)
-* [Tyson Hintze](https://github.com/hintzetyson)
-* [Ahmed Jalal](https://github.com/ahmedjalal93)
-* [Natalie Michelsen](https://github.com/nataliemichelsen)
-
-* Credit must also be noted for our instructor and TA's, as well as the author of our class curriculum and our SSM.
 
 ## **Installation**
 
-Send me a message on GitHub, otherwise, feel free to clone or download.
+This project consists of node, express, and react servers along with their associated dependencies. Clone the repository and npm install in your terminal.
 
 ## **Tests**
 
 There are currently no tests for this app.
-
-## **Video of Deployed Application**
-
-[Video Demonstration](https://drive.google.com/file/d/14OGu3DZ7D_X_BcPv77HW5zV-VxBm53XE/view?usp=sharing)
-
-![Deployed Application](/public/assets/images/video.gif)
