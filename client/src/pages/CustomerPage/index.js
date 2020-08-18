@@ -98,6 +98,7 @@ function CustomerPage() {
             display: `Your order ${res.data[0]._id} should arrive in less than ${res.data[0].estimatedTime} minutes.`,
           });
         }
+        setAddressInfo({ display: res.data[0].address });
       }
     });
   }

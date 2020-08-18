@@ -13,8 +13,8 @@ import easterEgg from "../../assets/images/JediMasterBarry.svg";
 import LoginButton from "../../components/Buttons/LoginButton";
 
 const slides = [
-  { id: 0, url: logo },
-  { id: 1, url: easterEgg }
+  { id: 0, url: logo, className: "logo" },
+  { id: 1, url: easterEgg, className: "secret-logo" }
 ];
 function HomePage() {
   const [index, set] = useState(0)
@@ -27,11 +27,11 @@ function HomePage() {
   useEffect(() => void setInterval(() => set(state => (state + 1) % 2), 5000), [])
   return (
     <main>
-      <div className="text-center logo-container mx-auto">
+      <div className="logo-container text-center mx-auto">
         {transitions.map(({ item, props, key }) => (
           <animated.div
             key={key}
-            className="logo mx-auto c"
+            className={`${item.className} c mx-auto`}
             src={logo}
             alt="Normal Barry"
             style={{ ...props, backgroundImage: `url(${item.url})` }}
