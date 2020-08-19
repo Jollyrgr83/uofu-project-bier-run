@@ -10,8 +10,6 @@ const driverPageUtil = {
         return 1;
       }
     });
-    console.log("orders", orders);
-    console.log("sorted orders", sortedArray);
     return sortedArray;
   },
   // returns count of selected orders
