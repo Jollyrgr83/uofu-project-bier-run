@@ -24,7 +24,7 @@ module.exports = {
         let item = [];
         item.push(`Name: ${orderDetails[i].name}`);
         item.push(`Quantity: ${orderDetails[i].quantity}`);
-        item.push(`Subtotal: $${orderDetails[i].subtotal}`);
+        item.push(`Subtotal: $${parseFloat(orderDetails[i].subtotal).toFixed(2)}`);
         orderTable.push(item);
         orderTable.push(["", "", ""]);
       }
@@ -45,7 +45,7 @@ module.exports = {
                 ["", "", ""],
                 ["", "", `Total Items: ${dbModel[0].totalItems}`],
                 ["", "", ""],
-                ["", "", `Total Price: $${dbModel[0].totalPrice}`],
+                ["", "", `Total Price: $${parseFloat(dbModel[0].totalPrice).toFixed(2)}`],
               ],
             },
           },

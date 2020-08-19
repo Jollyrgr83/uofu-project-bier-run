@@ -25,8 +25,6 @@ const customStyles = {
   },
 };
 
-let renderCounter = 0;
-
 Modal.setAppElement("#root");
 
 function CustomerPage() {
@@ -85,7 +83,6 @@ function CustomerPage() {
 
   function loadUserOrderMessage() {
     API.getUserOrderData(user.email).then((res) => {
-      console.log("getUserOrder res", res);
       if (!res.data[0]) {
         setOrderMessage({ display: "You have no active orders." });
       } else {
@@ -172,9 +169,7 @@ function CustomerPage() {
       address: addressString,
       userID: user.email,
     };
-    console.log("orderObj", orderObj);
     API.sendOrder(orderObj).then((res) => {
-      console.log("sendOrder res", res);
       setPlaceOrderMessage({
         isShow: true,
         text: `Your order has been placed. Your order ID is: ${res.data._id}`,
@@ -182,8 +177,6 @@ function CustomerPage() {
     });
     toggleAddressModal();
   }
-  renderCounter++;
-  console.log("Page Render: ", renderCounter);
   // determines animation state for beer cards based on mobile layout or not
   function loadCards() {
     if (window.screen.availWidth <= 500) {

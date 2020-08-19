@@ -23,8 +23,6 @@ const customStyles = {
   }
 };
 
-let renderCounter = 0;
-
 Modal.setAppElement("#root");
 
 function DriverPage() {
@@ -51,10 +49,8 @@ function DriverPage() {
   // loads orders from API and sorts based on selected status
   function loadOrders() {
     API.getOrders().then(res => {
-      console.log("getOrders res.data: ", res.data);
       const sortedArray = driverPageUtil.sortBySelectedStatus(res.data);
       const numSelectedOrders = driverPageUtil.countSelectedOrders(res.data);
-      console.log("sortedOrders", sortedArray);
       setOrders({
         rawOrders: [...res.data],
         sortedOrders: [...sortedArray],
@@ -77,7 +73,6 @@ function DriverPage() {
   function updateDeliveryTime(event) {
     const selectedETA = document.getElementById("ETA");
     API.selectOrder(activeOrder, selectedETA.value).then(res => {
-      console.log("selectOrder res", res);
       // trigger loadOrders to refresh order list
       loadOrders();
     });
@@ -111,9 +106,6 @@ function DriverPage() {
   function getPDF(event) {
     API.getPDF(event.target.id);
   }
-
-  renderCounter++;
-  console.log("Page Render: ", renderCounter);
 
   // page render
   if (isLoading) {
