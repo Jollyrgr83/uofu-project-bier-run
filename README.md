@@ -2,6 +2,8 @@
 
 [Go to Bier Run](https://bier-run.herokuapp.com/)
 
+![Bier Run Homepage](project-bier-run.png)
+
 ## **Table of Contents**
 
 * Project Description
